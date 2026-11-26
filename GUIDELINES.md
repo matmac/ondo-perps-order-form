@@ -181,7 +181,7 @@ maxSize           = floor(buyingPower / markPrice, sizePrecision)
 
 - **Order side and order type.** The Segmented Control (side) is a `role="radiogroup"`, Tabs (order type) are a `role="tablist"`, and the Toggle Group (amount unit) is a `role="radiogroup"` with `aria-label="Amount unit"`. Both use a roving tabindex, and the arrow keys move between options.
 - **Number fields.** Each field is a real `<input inputmode="decimal">` with a linked label. Errors use `aria-invalid` plus `aria-describedby`.
-- **Slider.** The slider uses `role="slider"` with `aria-valuetext` (for example "20x"). Arrows step ±1, PageUp and PageDown step ±5, and Home and End jump to the limits.
+- **Slider.** The slider is a native range input (`role="slider"`) with `aria-valuetext` (for example "25%"). Arrows step ±1, PageUp and PageDown step ±10, and Home and End jump to the limits.
 - **Switch.** A switch uses `role="switch"`, and the whole row is clickable.
 - **Disabled CTA.** It stays focusable through `aria-disabled` and points to its reason. Label changes are announced with `aria-live="polite"`.
 - **Summary.** The summary is one `<dl>`. Hints open on focus as well as on hover.

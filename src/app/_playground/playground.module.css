@@ -73,7 +73,7 @@
 .orders { display: grid; gap: var(--space-stack-xs); width: 100%; }
 .order { justify-content: flex-start; }
 .wide { width: 100%; }
-.muted { color: var(--color-fg-tertiary); }
+.muted { color: var(--color-fg-secondary); } /* tertiary falls under 4.5:1 on the translucent sheet */
 .links {
   display: flex;
   gap: var(--space-inset-md);
