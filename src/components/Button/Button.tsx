@@ -54,9 +54,8 @@ export function Button({
       aria-busy={loading || undefined}
       onClick={handleClick}
     >
-      {loading && <span className={s.spinner} aria-hidden />}
       <span className={s.content}>
-        {iconStart && <Icon name={iconStart} size="sm" />}
+        {loading ? <span className={s.spinner} aria-hidden /> : iconStart && <Icon name={iconStart} size="sm" />}
         {children}
         {iconEnd && <Icon name={iconEnd} size="sm" />}
       </span>

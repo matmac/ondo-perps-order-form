@@ -7,7 +7,8 @@ import s from "./LabelValueRow.module.css";
 
 export interface LabelValueRowProps {
   label: string;
-  value: ReactNode;
+  /** null renders "–" in the muted tone. */
+  value: ReactNode | null;
   /** xs for the details list, sm (bigger value) for account rows. */
   size?: "xs" | "sm";
   /**
@@ -50,8 +51,8 @@ export function LabelValueRow({ label, value, size = "xs", tone = "default", onL
             <Divider />
           </>
         )}
-        <Label tone={tone} size={size} numeric>
-          {value}
+        <Label tone={value === null ? "muted" : tone} size={size} numeric>
+          {value ?? "–"}
         </Label>
         {action && <Button variant="tertiary" size="xs" iconStart={action.icon} aria-label={action.label} onClick={action.onClick} />}
       </dd>

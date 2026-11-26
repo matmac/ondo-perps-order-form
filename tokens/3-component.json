@@ -431,10 +431,12 @@
         "$value": "{type.label.sm}"
       },
       "value": {
-        "$value": "{type.value.md}"
+        "$value": "{type.value.sm}",
+        "$description": "Value and unit in the md field (prices, %), as in Figma"
       },
       "value-lg": {
-        "$value": "{type.value.lg}"
+        "$value": "{type.value.lg}",
+        "$description": "Value and unit in the lg field (amount), as in Figma"
       }
     }
   },

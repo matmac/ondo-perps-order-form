@@ -154,7 +154,7 @@ export function Showcase() {
             helper="Available 1,250.00 USD"
           />
           <Input label="Limit price" size="md" unit="USD" value={price} onValueChange={setPrice} trailing={<Button variant="tertiary" aria-label="Use mid price">Mid</Button>} />
-          <Input label="Size" value="5000" onValueChange={() => {}} unit="USD" error="Not enough margin. Max 1,250.00 USD" />
+          <Input label="Size" value="5000" onValueChange={() => {}} unit="USD" status="error" helper="Not enough margin. Max 1,250.00 USD" />
           <Input label="Trigger price" size="md" unit="USD" value="" onValueChange={() => {}} disabled />
         </div>
       </Section>

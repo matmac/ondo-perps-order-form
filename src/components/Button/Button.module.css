@@ -93,12 +93,9 @@
 .button[aria-disabled="true"],
 .button[data-loading] { cursor: not-allowed; }
 
-/* loading keeps the width: label hides, spinner sits on top */
-.button[data-loading] .content { visibility: hidden; }
+/* loading: the spinner takes the start icon slot, the label stays (it says what is happening) */
 .spinner {
-  position: absolute;
-  inset: 0;
-  margin: auto;
+  flex: none;
   width: var(--size-icon-sm);
   height: var(--size-icon-sm);
   border-radius: var(--radius-pill);

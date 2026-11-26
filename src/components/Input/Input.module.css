@@ -1,5 +1,6 @@
 .root {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-stack-xs);
 }
 
@@ -22,10 +23,11 @@
 .field:has(.input:focus-visible) { --_border: var(--input-border-focus); }
 .field[data-error] { --_border: var(--input-border-error); }
 .field[data-disabled] { background: var(--input-bg-disabled); cursor: not-allowed; }
+.field[data-readonly] { cursor: default; }
+.field[data-readonly]:hover { background: var(--input-bg-default); }
 
 .label {
-  flex: 1;
-  min-width: 0;
+  flex: none;
   font: var(--input-type-label);
   letter-spacing: var(--type-label-sm-letter-spacing);
   color: var(--input-fg-label);
@@ -50,17 +52,17 @@
 
 .unit {
   flex: none;
-  font: var(--input-type-label);
-  letter-spacing: var(--type-label-sm-letter-spacing);
+  font: var(--input-type-value-lg);
+  letter-spacing: var(--type-value-lg-letter-spacing);
   color: var(--input-fg-value);
 }
 .field[data-disabled] .label,
 .field[data-disabled] .unit { color: var(--input-fg-placeholder); }
 
 .field[data-size="md"] { height: var(--input-height-md); }
-.field[data-size="md"] .label,
-.field[data-size="md"] .unit { font: var(--type-label-xs); letter-spacing: var(--type-label-xs-letter-spacing); }
-.field[data-size="md"] .input { font: var(--input-type-value); letter-spacing: var(--type-value-md-letter-spacing); }
+.field[data-size="md"] .label { font: var(--type-label-xs); letter-spacing: var(--type-label-xs-letter-spacing); }
+.field[data-size="md"] .input,
+.field[data-size="md"] .unit { font: var(--input-type-value); letter-spacing: var(--type-value-sm-letter-spacing); }
 
 .message {
   font: var(--type-label-xs);

@@ -372,8 +372,8 @@
   --focus-ring-width: var(--border-width-focus);
   --label-type-value-xs: var(--type-value-xs);
   --label-type-value-sm: var(--type-value-sm);
-  --input-type-value: var(--type-value-md);
-  --input-type-value-lg: var(--type-value-lg);
+  --input-type-value: var(--type-value-sm); /** Value and unit in the md field (prices, %), as in Figma */
+  --input-type-value-lg: var(--type-value-lg); /** Value and unit in the lg field (amount), as in Figma */
 }
 
 /* Semantic · Layout · mode: Mobile */

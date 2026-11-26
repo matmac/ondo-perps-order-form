@@ -1,22 +1,29 @@
 "use client";
 
-import { useId, useRef, type ChangeEvent, type ReactNode } from "react";
+import { useId, useRef, useState, type ChangeEvent, type FocusEvent, type ReactNode } from "react";
 import s from "./Input.module.css";
 
 export interface InputProps {
   label: string;
+  /** Keeps the label for screen readers only, for example the % field next to the slider. */
+  hideLabel?: boolean;
   value: string;
   onValueChange: (value: string) => void;
-  /** Unit after the value, for example USD or BTC. */
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
+  /** Unit after the value, for example USD or %. */
   unit?: string;
-  /** lg 44 for the main amount, md 36 for prices. */
+  /** lg 44 for the main amount, md 36 for prices and %. */
   size?: "md" | "lg";
+  /** error: danger border, and the helper is read as the error message. */
+  status?: "default" | "error";
   placeholder?: string;
-  /** Helper below the field. Replaced by the error when there is one. */
+  /** Text below the field: a hint, or the error message when status is error. */
   helper?: ReactNode;
-  /** Error message. Shows the danger border and is read with the field. */
-  error?: string;
   disabled?: boolean;
+  /** Shows the value but blocks edits, for example while the order is submitting. */
+  readOnly?: boolean;
+  /** Adds thousands separators while the field is not focused ("71841.5" shows as "71,841.5"). */
+  groupDigits?: boolean;
   /** Slot at the end of the field: a tertiary Button or a ToggleGroup. */
   trailing?: ReactNode;
   id?: string;
@@ -27,23 +34,28 @@ export interface InputProps {
 /** Number field. The label sits inside on the left, the value on the right, like the Ondo Perps form. */
 export function Input({
   label,
+  hideLabel = false,
   value,
   onValueChange,
+  onBlur,
   unit,
   size = "lg",
+  status = "default",
   placeholder = "0.00",
   helper,
-  error,
   disabled = false,
+  readOnly = false,
+  groupDigits = false,
   trailing,
   id,
   name,
   className,
 }: InputProps) {
+  const [focused, setFocused] = useState(false);
   const autoId = useId();
   const inputId = id ?? autoId;
-  const messageId = `${inputId}-message`;
-  const message = error ?? helper;
+  const helperId = `${inputId}-helper`;
+  const error = status === "error";
   const ref = useRef<HTMLInputElement>(null);
 
   return (
@@ -51,8 +63,9 @@ export function Input({
       <div
         className={s.field}
         data-size={size}
-        data-error={error ? true : undefined}
+        data-error={error || undefined}
         data-disabled={disabled || undefined}
+        data-readonly={readOnly || undefined}
         // The whole row is the hit area; the trailing slot keeps its own clicks.
         onPointerDown={(e) => {
           if (e.target === e.currentTarget) {
@@ -61,7 +74,7 @@ export function Input({
           }
         }}
       >
-        <label htmlFor={inputId} className={s.label}>
+        <label htmlFor={inputId} className={hideLabel ? "sr-only" : s.label}>
           {label}
         </label>
         <input
@@ -73,11 +86,17 @@ export function Input({
           autoComplete="off"
           spellCheck={false}
           placeholder={placeholder}
-          value={value}
+          value={groupDigits && !focused ? group(value) : value}
+          onFocus={() => setFocused(true)}
           disabled={disabled}
-          aria-invalid={error ? true : undefined}
-          aria-describedby={message ? messageId : undefined}
+          readOnly={readOnly}
+          aria-invalid={error || undefined}
+          aria-describedby={helper ? helperId : undefined}
           onChange={(e: ChangeEvent<HTMLInputElement>) => onValueChange(e.target.value)}
+          onBlur={(e) => {
+            setFocused(false);
+            onBlur?.(e);
+          }}
         />
         {unit && (
           <span className={s.unit} aria-hidden>
@@ -86,11 +105,17 @@ export function Input({
         )}
         {trailing}
       </div>
-      {message && (
-        <p id={messageId} className={s.message} data-error={error ? true : undefined} aria-live={error ? "polite" : undefined}>
-          {message}
+      {helper && (
+        <p id={helperId} className={s.message} data-error={error || undefined} aria-live={error ? "polite" : undefined}>
+          {helper}
         </p>
       )}
     </div>
   );
 }
+
+/** "1234567.50" → "1,234,567.50". Leaves the decimals exactly as typed. */
+const group = (v: string) => {
+  const [int, dec] = v.split(".");
+  return int.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (dec !== undefined ? `.${dec}` : "");
+};

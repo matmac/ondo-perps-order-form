@@ -1,0 +1,37 @@
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--order-form-gap);
+  width: 100%;
+  max-width: 310px;
+  padding: var(--order-form-padding);
+  border-radius: var(--order-form-radius);
+  background: var(--order-form-bg);
+}
+
+.group,
+.decision {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--order-form-item-gap);
+}
+
+.inline {
+  display: flex;
+  align-items: center;
+  gap: var(--order-form-inline-gap);
+}
+
+.slider { flex: 1; min-width: 0; }
+/* the % field next to the slider: wide enough for "100" and the unit */
+.percent { flex: none; width: calc(var(--size-control-md) * 2 + var(--space-inline-xs)); }
+.fill { flex: 1 1 0; min-width: 0; }
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--switch-target);
+  cursor: pointer;
+}
+.toggleRow[data-disabled] { cursor: not-allowed; }
