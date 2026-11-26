@@ -45,21 +45,27 @@
 }
 .layout[data-sheet="closed"] .panel { transform: translateX(100%); visibility: hidden; }
 
-/* Narrow screens: no room for a side sheet, so the controls follow the form. */
+/* Narrow screens: the form fills the screen edge to edge, the controls follow it. */
 @media (max-width: 767px) {
-  .layout { flex-direction: column; padding-right: var(--space-stack-lg); gap: var(--space-stack-lg); }
-  .sheetToggle { position: static; align-self: flex-end; }
+  .layout {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-stack-lg);
+    padding: 0;
+  }
+  .sheetToggle { position: relative; align-self: flex-end; margin: var(--space-stack-lg) var(--space-stack-lg) 0; }
   .layout[data-sheet="closed"] .panel { display: none; }
   .panel {
     position: static;
+    width: auto;
+    margin: 0 var(--space-stack-lg) var(--space-stack-lg);
     padding: var(--space-stack-lg);
-    width: 100%;
-    max-width: var(--size-container-md);
     overflow: visible;
     border-radius: var(--radius-container);
     box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-subtle);
   }
 }
+
 
 .head,
 .field { display: grid; gap: var(--space-stack-xs); justify-items: start; min-width: 0; }

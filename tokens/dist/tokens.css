@@ -384,6 +384,8 @@
   --order-form-item-gap: var(--space-stack-sm); /** Inside a group (v2) */
   --order-form-inline-gap: var(--space-inline-sm); /** Side-by-side items, e.g. quick-size stops, options row */
   --order-form-width: var(--size-container-sm);
+  --order-form-bar-bg: var(--color-bg-surface-default);
+  --order-form-bar-border: var(--color-border-subtle); /** Top edge, separates the bar from the scrolling form */
   --focus-ring-color: var(--color-border-focus);
   --focus-ring-width: var(--border-width-focus);
   --label-type-value-xs: var(--type-value-xs);

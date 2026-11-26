@@ -28,7 +28,7 @@ These guidelines are for engineers and AI coding agents who extend the order for
 6. **Make the CTA label say what will happen**, for example "Long 0.0500 BTC". Never use "Error" or "Submit".
 7. **Use green and red only to mean Long and Short.** Settings use the neutral `switch/track/bg/on`.
 8. **Let components render empty values as "–".** Never type a dash into data.
-9. **Give every interactive element a 24 px target on desktop and a 44 px target on mobile.** This comes from `size/target/min` and the Layout modes.
+9. **Give every interactive element a 24 px target on desktop and a 44 px target on mobile.** This comes from `size/target/min` and the Layout modes. In code, controls compose `internal/target.module.css`: an invisible pseudo-element grows the hit area without changing the look.
 10. **Get new behaviour into the spec before it goes into code.** Add the prop to Figma › 03 first, then build it.
 
 ## 3. Tokens
@@ -92,6 +92,7 @@ There are three kinds of building block:
 | TP/SL | A toggle row, then 2 × [`Input` price, `Input` %] |
 | Trade CTA | `Button variant="primary"` with `tone` from the side (`success` / `danger`), or `tone="neutral"` for Sign in / Deposit USDC, with its label from the status |
 | Account rows | 2 × `LabelValueRow size="sm"` |
+| Decision bar (mobile) | In the Mobile layout the Review rows, the notice and the Trade CTA stick to the bottom of the screen (`order-form/bar/*`), so cost and the action stay visible while the form scrolls. Visual order only: keyboard and reading order keep the decision before the details. |
 
 Patterns never reach into a component's internals. If a pattern needs a new look, add a prop or a component token to the component first. Promote a pattern to a component only when a second screen needs it.
 

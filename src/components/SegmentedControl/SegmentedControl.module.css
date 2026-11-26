@@ -28,6 +28,7 @@
 .track[data-tone="danger"] { --_indicator: var(--segmented-control-indicator-bg-danger); --_selected: var(--segmented-control-label-fg-selected); }
 
 .item {
+  composes: target from "../internal/target.module.css";
   border-radius: var(--segmented-control-indicator-radius);
   font: var(--segmented-control-label-type);
   letter-spacing: var(--type-label-sm-letter-spacing);

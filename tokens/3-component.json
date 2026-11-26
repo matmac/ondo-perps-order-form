@@ -769,6 +769,18 @@
     "width": {
       "$type": "dimension",
       "$value": "{size.container.sm}"
+    },
+    "bar": {
+      "$description": "Mobile: the decision bar (review rows, notice, CTA) sticks to the bottom of the screen",
+      "bg": {
+        "$type": "color",
+        "$value": "{color.bg.surface.default}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{color.border.subtle}",
+        "$description": "Top edge, separates the bar from the scrolling form"
+      }
     }
   },
   "focus-ring": {

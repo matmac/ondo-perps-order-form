@@ -11,6 +11,7 @@
 .track[data-stretch] .item { flex: 1; }
 
 .item {
+  composes: target from "../internal/target.module.css";
   min-width: calc(var(--tabs-item-height) * 2 + var(--space-inline-xs));
   height: var(--tabs-item-height);
   padding-inline: var(--tabs-item-padding-inline);

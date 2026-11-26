@@ -17,6 +17,7 @@
 .value { justify-content: flex-end; }
 
 .trigger {
+  composes: target from "../internal/target.module.css";
   display: inline-flex;
   border-radius: var(--radius-control-sm);
 }
