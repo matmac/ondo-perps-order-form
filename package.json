@@ -6,8 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "tokens": "node tokens/build.mjs && cp tokens/dist/tokens.css src/styles/tokens.css"
+    "lint": "eslint && node scripts/check-tokens.mjs",
+    "tokens": "node tokens/build.mjs && cp tokens/dist/tokens.css src/styles/tokens.css",
+    "lint:tokens": "node scripts/check-tokens.mjs"
   },
   "dependencies": {
     "next": "16.4.6",

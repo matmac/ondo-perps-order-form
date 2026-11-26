@@ -1,0 +1,17 @@
+/*
+ * Type styles, one class per Semantic · Typography token (the same names as the Figma text styles).
+ * The `font` shorthand cannot carry letter-spacing, so each class sets it from the matching part token.
+ * value/* is for numbers: tabular figures keep digits from shifting while typing or dragging.
+ */
+.type-label-xs { font: var(--type-label-xs); letter-spacing: var(--type-label-xs-letter-spacing); }
+.type-label-sm { font: var(--type-label-sm); letter-spacing: var(--type-label-sm-letter-spacing); }
+.type-label-md { font: var(--type-label-md); letter-spacing: var(--type-label-md-letter-spacing); }
+
+.type-value-xs,
+.type-value-sm,
+.type-value-md,
+.type-value-lg { font-variant-numeric: tabular-nums; }
+.type-value-xs { font: var(--type-value-xs); letter-spacing: var(--type-value-xs-letter-spacing); }
+.type-value-sm { font: var(--type-value-sm); letter-spacing: var(--type-value-sm-letter-spacing); }
+.type-value-md { font: var(--type-value-md); letter-spacing: var(--type-value-md-letter-spacing); }
+.type-value-lg { font: var(--type-value-lg); letter-spacing: var(--type-value-lg-letter-spacing); }
