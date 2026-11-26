@@ -1,22 +1,41 @@
 .layout {
   display: flex;
   flex-wrap: wrap;
-  /* Centred as a pair, tops aligned: centring vertically would make the form jump when TP/SL opens. */
-  align-items: flex-start;
+  /* The form is centred both ways in the space left of the controls sheet. */
+  --_sheet: 360px;
+  align-items: center;
   justify-content: center;
-  gap: var(--space-stack-lg);
-  padding: calc(var(--space-stack-lg) * 4) var(--space-stack-lg);
+  min-height: 100dvh;
+  padding: var(--space-stack-lg);
+  padding-right: calc(var(--_sheet) + var(--space-stack-lg));
 }
 
 .panel {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: var(--_sheet);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+  align-content: start;
   gap: var(--space-stack-lg);
-  width: 100%;
-  max-width: 360px;
   padding: var(--space-stack-lg);
-  border-radius: var(--radius-container);
-  box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-subtle);
+  background: var(--color-bg-surface-default);
+  box-shadow: inset var(--border-width-default) 0 0 0 var(--color-border-subtle);
+}
+
+/* Narrow screens: no room for a side sheet, so the controls follow the form. */
+@media (max-width: 767px) {
+  .layout { flex-direction: column; padding-right: var(--space-stack-lg); gap: var(--space-stack-lg); }
+  .panel {
+    position: static;
+    width: 100%;
+    max-width: 360px;
+    overflow: visible;
+    border-radius: var(--radius-container);
+    box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-subtle);
+  }
 }
 
 .head,
@@ -31,7 +50,7 @@
 /* Prototype toast: enters from the bottom (reveal + enter), leaves with state + exit. */
 .toast {
   position: fixed;
-  left: 50%;
+  left: calc((100% - var(--_sheet)) / 2);
   bottom: var(--space-stack-lg);
   max-width: calc(100% - var(--space-stack-lg) * 2);
   padding: var(--space-inset-sm) var(--space-inset-md);
@@ -54,4 +73,8 @@
   transition:
     transform var(--motion-duration-reveal) var(--motion-easing-enter),
     opacity var(--motion-duration-reveal) var(--motion-easing-enter);
+}
+
+@media (max-width: 767px) {
+  .toast { left: 50%; }
 }
