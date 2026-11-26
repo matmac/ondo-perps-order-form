@@ -37,6 +37,7 @@
   transition-timing-function: var(--motion-easing-emphasized);
 }
 
-.item:hover { background: var(--tabs-item-bg-hover); color: var(--tabs-item-fg-hover); }
-.item[aria-selected="true"] { background: none; color: var(--tabs-item-fg-selected); }
+/* Hover changes the label only: a hover fill would sit where the indicator is about to land and read as a jump. */
+.item:hover { color: var(--tabs-item-fg-hover); }
+.item[aria-selected="true"] { color: var(--tabs-item-fg-selected); }
 .item[aria-disabled="true"] { background: none; color: var(--tabs-item-fg-disabled); cursor: not-allowed; }

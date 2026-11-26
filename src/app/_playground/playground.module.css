@@ -1,14 +1,16 @@
 .layout {
   display: flex;
   flex-wrap: wrap;
+  /* Centred as a pair, tops aligned: centring vertically would make the form jump when TP/SL opens. */
   align-items: flex-start;
   justify-content: center;
   gap: var(--space-stack-lg);
-  padding: var(--space-stack-lg);
+  padding: calc(var(--space-stack-lg) * 4) var(--space-stack-lg);
 }
 
 .panel {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-stack-lg);
   width: 100%;
   max-width: 360px;
@@ -18,10 +20,38 @@
 }
 
 .head,
-.field { display: grid; gap: var(--space-stack-xs); justify-items: start; }
+.field { display: grid; gap: var(--space-stack-xs); justify-items: start; min-width: 0; }
 .row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-inline-sm); }
 .orders { display: grid; gap: var(--space-stack-xs); width: 100%; }
 .order { justify-content: flex-start; }
-.note { min-height: var(--size-icon-sm); }
+.muted { color: var(--color-fg-tertiary); }
 .links { display: flex; gap: var(--space-inline-sm); }
 .links a { color: var(--color-fg-info); }
+
+/* Prototype toast: enters from the bottom (reveal + enter), leaves with state + exit. */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-stack-lg);
+  max-width: calc(100% - var(--space-stack-lg) * 2);
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  border-radius: var(--radius-control);
+  background: var(--color-bg-surface-inverse);
+  color: var(--color-fg-inverse);
+  font: var(--type-label-xs);
+  letter-spacing: var(--type-label-xs-letter-spacing);
+  box-shadow: var(--elevation-glow);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, calc(100% + var(--space-stack-lg)));
+  transition:
+    transform var(--motion-duration-state) var(--motion-easing-exit),
+    opacity var(--motion-duration-state) var(--motion-easing-exit);
+}
+.toast[data-open] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition:
+    transform var(--motion-duration-reveal) var(--motion-easing-enter),
+    opacity var(--motion-duration-reveal) var(--motion-easing-enter);
+}

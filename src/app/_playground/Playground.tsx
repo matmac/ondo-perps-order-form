@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { OrderForm, Tabs, Label, Switch, ToggleGroup, Button, type OrderFormInitial } from "@/components";
 import { ThemeSwitch } from "@/components/dev/ThemeSwitch";
 import { account as demoAccount, exampleOrders, marketBySymbol, markets } from "@/lib/order";
 import s from "./playground.module.css";
+
+const TOAST_MS = 3000;
 
 type AccountMode = "funded" | "signedOut" | "noFunds";
 
@@ -19,7 +21,15 @@ export function Playground() {
   const [marketOpen, setMarketOpen] = useState(true);
   const [initial, setInitial] = useState<OrderFormInitial | undefined>();
   const [run, setRun] = useState(0);
-  const [note, setNote] = useState("");
+  const [toast, setToast] = useState<{ id: number; text: string } | null>(null);
+  const [toastOpen, setToastOpen] = useState(false);
+
+  // Out-of-scope clicks (2nd layer) show a short toast from the bottom, then leave on their own.
+  useEffect(() => {
+    if (!toast) return;
+    const hide = setTimeout(() => setToastOpen(false), TOAST_MS);
+    return () => clearTimeout(hide);
+  }, [toast]);
 
   const market = marketBySymbol(symbol);
   const account = accountMode === "signedOut" ? null : { availableBalance: accountMode === "noFunds" ? 0 : demoAccount.availableBalance };
@@ -36,13 +46,16 @@ export function Playground() {
         account={account}
         marketOpen={marketOpen}
         initial={initial}
-        onSecondLayer={(what) => setNote(`"${what}" opens the 2nd layer, out of scope for this build.`)}
+        onSecondLayer={(what) => {
+          setToast({ id: Date.now(), text: `${what[0].toUpperCase()}${what.slice(1)} opens the 2nd layer, out of scope for this build.` });
+          setToastOpen(true);
+        }}
       />
 
       <aside className={s.panel} aria-label="Prototype controls">
         <header className={s.head}>
           <Label size="sm" tone="default">Prototype controls</Label>
-          <Label tone="muted">Not part of the form. They stand in for the asset picker, the account and the backend.</Label>
+          <p className={`type-label-xs ${s.muted}`}>Not part of the form. They stand in for the asset picker, the account and the backend.</p>
         </header>
 
         <div className={s.field}>
@@ -97,7 +110,7 @@ export function Playground() {
               </Button>
             ))}
           </div>
-          <Label tone="muted">Submitting: place a valid order. Empty: clear the amount.</Label>
+          <p className={`type-label-xs ${s.muted}`}>Submitting: place a valid order. Empty: clear the amount.</p>
         </div>
 
         <div className={s.row}>
@@ -105,15 +118,15 @@ export function Playground() {
           <ThemeSwitch />
         </div>
 
-        <p className={s.note} aria-live="polite">
-          <Label tone="muted">{note}</Label>
-        </p>
-
         <nav className={s.links}>
           <Link href="/components" className="type-label-xs">Components</Link>
           <Link href="/tokens" className="type-label-xs">Tokens</Link>
         </nav>
       </aside>
+
+      <div className={s.toast} data-open={toastOpen || undefined} role="status" aria-live="polite">
+        {toast?.text}
+      </div>
     </div>
   );
 }
