@@ -1,0 +1,22 @@
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--label-value-row-gap);
+  min-height: var(--label-value-row-min-height);
+}
+
+.term,
+.value {
+  display: flex;
+  align-items: center;
+  gap: var(--label-value-row-gap);
+  min-width: 0;
+}
+
+.value { justify-content: flex-end; }
+
+.trigger {
+  display: inline-flex;
+  border-radius: var(--radius-control-sm);
+}
