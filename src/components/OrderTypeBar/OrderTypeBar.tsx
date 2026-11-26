@@ -24,7 +24,7 @@ export function OrderTypeBar({ orderTypes, value, onValueChange, marginMode, lev
       <Tabs aria-label="Order type" items={orderTypes} value={value} onValueChange={onValueChange} />
       <Button
         variant="secondary"
-        iconEnd="drop-down"
+        iconEnd="adjust"
         aria-haspopup="dialog"
         onClick={onMarginClick}
       >
