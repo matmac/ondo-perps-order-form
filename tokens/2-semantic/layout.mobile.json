@@ -1,0 +1,105 @@
+{
+  "$description": "Tier 2 · Semantic layout, breakpoint mode: Mobile (< 768px). Touch: larger controls and targets, roomier insets. Same paths as layout.desktop.json.",
+  "space": {
+    "$type": "dimension",
+    "inset": {
+      "sm": {
+        "$value": "{dimension.8}"
+      },
+      "md": {
+        "$value": "{dimension.16}"
+      }
+    },
+    "stack": {
+      "xs": {
+        "$value": "{dimension.4}"
+      },
+      "sm": {
+        "$value": "{dimension.8}"
+      },
+      "lg": {
+        "$value": "{dimension.20}"
+      }
+    },
+    "inline": {
+      "2xs": {
+        "$value": "{dimension.2}"
+      },
+      "xs": {
+        "$value": "{dimension.4}"
+      },
+      "sm": {
+        "$value": "{dimension.8}"
+      }
+    }
+  },
+  "size": {
+    "$type": "dimension",
+    "control": {
+      "xs": {
+        "$value": "{dimension.24}"
+      },
+      "sm": {
+        "$value": "{dimension.32}"
+      },
+      "md": {
+        "$value": "{dimension.40}"
+      },
+      "lg": {
+        "$value": "{dimension.48}"
+      }
+    },
+    "icon": {
+      "xs": {
+        "$value": "{dimension.12}",
+        "$description": "Knobs and small glyphs"
+      },
+      "md": {
+        "$value": "{dimension.20}"
+      }
+    },
+    "target": {
+      "min": {
+        "$value": "{dimension.44}",
+        "$description": "Touch target (Apple HIG 44pt)"
+      }
+    },
+    "tick": {
+      "width": {
+        "$value": "{dimension.2}"
+      },
+      "height": {
+        "$value": "{dimension.16}"
+      }
+    },
+    "handle": {
+      "width": {
+        "$value": "{dimension.11}"
+      },
+      "height": {
+        "$value": "{dimension.16}"
+      },
+      "$description": "Slider thumb, as shipped"
+    },
+    "knob": {
+      "$value": "{dimension.20}"
+    },
+    "grip": {
+      "width": {
+        "$value": "{dimension.1}"
+      },
+      "height": {
+        "$value": "{dimension.8}"
+      }
+    }
+  },
+  "border-width": {
+    "$type": "dimension",
+    "default": {
+      "$value": "{border-width.1}"
+    },
+    "focus": {
+      "$value": "{border-width.2}"
+    }
+  }
+}

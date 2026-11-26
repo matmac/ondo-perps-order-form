@@ -1,0 +1,16 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --motion-duration-feedback: var(--duration-0); /** Collapsed: no travel */
+  --motion-duration-state: var(--duration-100); /** Kept short: opacity and colour still change, nothing travels */
+  --motion-duration-move: var(--duration-0); /** Collapsed: no travel */
+  --motion-duration-reveal: var(--duration-100); /** Kept short: opacity and colour still change, nothing travels */
+  --motion-duration-sheet: var(--duration-0); /** Collapsed: no travel */
+  --motion-duration-loop: var(--duration-800); /** One turn of a continuous indicator (spinner). Kept in Reduced mode: it is essential feedback. */
+  --motion-easing-standard: var(--easing-ease-in-out);
+  --motion-easing-enter: var(--easing-ease-in-out);
+  --motion-easing-exit: var(--easing-ease-in-out);
+  --motion-easing-emphasized: var(--easing-ease-in-out);
+}

@@ -1,0 +1,48 @@
+{
+  "$description": "Tier 2 · Semantic motion, mode: Reduced (prefers-reduced-motion: reduce). Same paths as motion.json.",
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "$description": "Reduced motion: movement removed, state changes stay legible",
+      "feedback": {
+        "$value": "{duration.0}",
+        "$description": "Collapsed: no travel"
+      },
+      "state": {
+        "$value": "{duration.100}",
+        "$description": "Kept short: opacity and colour still change, nothing travels"
+      },
+      "move": {
+        "$value": "{duration.0}",
+        "$description": "Collapsed: no travel"
+      },
+      "reveal": {
+        "$value": "{duration.100}",
+        "$description": "Kept short: opacity and colour still change, nothing travels"
+      },
+      "sheet": {
+        "$value": "{duration.0}",
+        "$description": "Collapsed: no travel"
+      },
+      "loop": {
+        "$value": "{duration.800}",
+        "$description": "One turn of a continuous indicator (spinner). Kept in Reduced mode: it is essential feedback."
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": {
+        "$value": "{easing.ease-in-out}"
+      },
+      "enter": {
+        "$value": "{easing.ease-in-out}"
+      },
+      "exit": {
+        "$value": "{easing.ease-in-out}"
+      },
+      "emphasized": {
+        "$value": "{easing.ease-in-out}"
+      }
+    }
+  }
+}

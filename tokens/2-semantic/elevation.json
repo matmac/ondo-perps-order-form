@@ -1,0 +1,26 @@
+{
+  "$description": "Tier 2 · Semantic elevation. Single mode. Aliases tier 1 only.",
+  "elevation": {
+    "$type": "shadow",
+    "handle": {
+      "$value": {
+        "color": "{color.alpha.black.30}",
+        "offsetX": "{dimension.0}",
+        "offsetY": "{dimension.0}",
+        "blur": "{dimension.2}",
+        "spread": "{dimension.0}"
+      },
+      "$description": "Separates a light knob from a light track"
+    },
+    "glow": {
+      "$value": {
+        "color": "{color.alpha.white.20}",
+        "offsetX": "{dimension.0}",
+        "offsetY": "{dimension.0}",
+        "blur": "{dimension.12}",
+        "spread": "{dimension.0}"
+      },
+      "$description": "Soft light halo for a disabled handle (original: 10px; snapped to the 12 step)"
+    }
+  }
+}

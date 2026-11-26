@@ -1,0 +1,29 @@
+{
+  "$description": "Tier 2 · Semantic theme, mode: Modern ([data-theme=\"modern\"]). Same paths as theme.classic.json.",
+  "radius": {
+    "$type": "dimension",
+    "control-sm": {
+      "$value": "{dimension.4}"
+    },
+    "control-nested": {
+      "$value": "{dimension.10}"
+    },
+    "control": {
+      "$value": "{dimension.12}"
+    },
+    "container": {
+      "$value": "{dimension.16}"
+    },
+    "pill": {
+      "$value": "{dimension.9999}"
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "numeric": {
+        "$value": "{font.family.geist-mono}"
+      }
+    }
+  }
+}

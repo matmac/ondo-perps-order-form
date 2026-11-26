@@ -1,0 +1,113 @@
+{
+  "$description": "Tier 2 · Semantic layout, breakpoint mode: Desktop (>= 768px). Same paths as layout.mobile.json.",
+  "space": {
+    "$type": "dimension",
+    "inset": {
+      "$description": "Padding inside a container",
+      "sm": {
+        "$value": "{dimension.8}"
+      },
+      "md": {
+        "$value": "{dimension.12}"
+      }
+    },
+    "stack": {
+      "$description": "Vertical gap between siblings",
+      "xs": {
+        "$value": "{dimension.4}"
+      },
+      "sm": {
+        "$value": "{dimension.8}"
+      },
+      "lg": {
+        "$value": "{dimension.16}"
+      }
+    },
+    "inline": {
+      "$description": "Horizontal gap between siblings",
+      "2xs": {
+        "$value": "{dimension.2}"
+      },
+      "xs": {
+        "$value": "{dimension.4}"
+      },
+      "sm": {
+        "$value": "{dimension.8}"
+      }
+    }
+  },
+  "size": {
+    "$type": "dimension",
+    "control": {
+      "xs": {
+        "$value": "{dimension.20}",
+        "$description": "Inline pickers inside a field: unit toggle"
+      },
+      "sm": {
+        "$value": "{dimension.28}",
+        "$description": "Compact controls: segmented items, chips"
+      },
+      "md": {
+        "$value": "{dimension.36}",
+        "$description": "Default controls: tabs, fields"
+      },
+      "lg": {
+        "$value": "{dimension.44}",
+        "$description": "Primary input and action"
+      }
+    },
+    "icon": {
+      "xs": {
+        "$value": "{dimension.12}",
+        "$description": "Knobs and small glyphs"
+      },
+      "md": {
+        "$value": "{dimension.20}"
+      }
+    },
+    "target": {
+      "min": {
+        "$value": "{dimension.24}",
+        "$description": "Minimum hit area. WCAG 2.2 · 2.5.8"
+      }
+    },
+    "tick": {
+      "width": {
+        "$value": "{dimension.2}"
+      },
+      "height": {
+        "$value": "{dimension.16}"
+      }
+    },
+    "handle": {
+      "width": {
+        "$value": "{dimension.11}"
+      },
+      "height": {
+        "$value": "{dimension.16}"
+      },
+      "$description": "Slider thumb, as shipped"
+    },
+    "knob": {
+      "$value": "{dimension.16}",
+      "$description": "Round thumb inside an xs control with 2px padding: size.control.xs minus 4 (switch)"
+    },
+    "grip": {
+      "width": {
+        "$value": "{dimension.1}"
+      },
+      "height": {
+        "$value": "{dimension.8}"
+      }
+    }
+  },
+  "border-width": {
+    "$type": "dimension",
+    "default": {
+      "$value": "{border-width.1}"
+    },
+    "focus": {
+      "$value": "{border-width.2}"
+    }
+  }
+}

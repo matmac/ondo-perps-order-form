@@ -1,0 +1,52 @@
+{
+  "$description": "Tier 2 · Semantic motion, mode: Default. Same paths as motion.reduced.json.",
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "$description": "Named by intent, not by speed",
+      "feedback": {
+        "$value": "{duration.100}",
+        "$description": "Press, hover: must feel instant"
+      },
+      "state": {
+        "$value": "{duration.150}",
+        "$description": "Colour and value changes (production default)"
+      },
+      "move": {
+        "$value": "{duration.200}",
+        "$description": "Something travels: Long/Short indicator, slider snap"
+      },
+      "reveal": {
+        "$value": "{duration.200}",
+        "$description": "Content appears or collapses: TP/SL, inline errors"
+      },
+      "sheet": {
+        "$value": "{duration.300}",
+        "$description": "Large surfaces: mobile order sheet"
+      },
+      "loop": {
+        "$value": "{duration.800}",
+        "$description": "One turn of a continuous indicator (spinner). Kept in Reduced mode: it is essential feedback."
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": {
+        "$value": "{easing.ease-in-out}",
+        "$description": "On-screen changes"
+      },
+      "enter": {
+        "$value": "{easing.ease-out}",
+        "$description": "Appearing"
+      },
+      "exit": {
+        "$value": "{easing.ease-in}",
+        "$description": "Leaving"
+      },
+      "emphasized": {
+        "$value": "{easing.ease-out-expo}",
+        "$description": "Quick start, soft settle: travel and sheets"
+      }
+    }
+  }
+}

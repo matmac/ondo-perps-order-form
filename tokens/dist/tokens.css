@@ -1,0 +1,432 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --color-alpha-black-30: rgba(29, 29, 29, 0.3);
+  --color-alpha-orange-30: rgba(255, 158, 102, 0.3);
+  --color-alpha-white-5: rgba(240, 240, 240, 0.05);
+  --color-alpha-white-10: rgba(240, 240, 240, 0.1);
+  --color-alpha-white-20: rgba(240, 240, 240, 0.2);
+  --color-alpha-white-30: rgba(240, 240, 240, 0.3);
+  --color-alpha-white-80: rgba(240, 240, 240, 0.8);
+  --color-black: #000000;
+  --color-blue-200: #8cb1ed;
+  --color-blue-600: #0e1e38;
+  --color-gray-100: #f0f0f0;
+  --color-gray-300: #b1b1b1;
+  --color-gray-400: #818181;
+  --color-gray-500: #626262;
+  --color-gray-700: #313131;
+  --color-gray-800: #1d1d1d;
+  --color-gray-900: #141414;
+  --color-green-200: #66d5b7;
+  --color-green-300: #00b987;
+  --color-green-400: #00946c;
+  --color-orange-200: #ffbb93;
+  --color-orange-600: #3e2415;
+  --color-purple-200: #d4a5ff;
+  --color-purple-500: #450e78;
+  --color-red-200: #ff7573;
+  --color-red-300: #ff5250;
+  --color-red-400: #b23938;
+  --color-red-600: #331010;
+  --color-white: #ffffff;
+  --dimension-0: 0px;
+  --dimension-1: 1px;
+  --dimension-2: 2px;
+  --dimension-4: 4px;
+  --dimension-6: 6px;
+  --dimension-8: 8px;
+  --dimension-10: 10px;
+  --dimension-11: 11px;
+  --dimension-12: 12px;
+  --dimension-16: 16px;
+  --dimension-20: 20px;
+  --dimension-24: 24px;
+  --dimension-28: 28px;
+  --dimension-32: 32px;
+  --dimension-36: 36px;
+  --dimension-40: 40px;
+  --dimension-44: 44px;
+  --dimension-48: 48px;
+  --dimension-9999: 9999px;
+  --font-family-gellix: Gellix, system-ui, sans-serif;
+  --font-family-geist-mono: 'Geist Mono', ui-monospace, monospace;
+  --font-weight-medium: 500;
+  --font-size-12: 12px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-18: 18px;
+  --font-line-height-normal: 1.32; /** Ratio. Production body/label line height. */
+  --font-letter-spacing-12: -0.12px;
+  --font-letter-spacing-14: -0.14px;
+  --font-letter-spacing-16: -0.16px;
+  --font-letter-spacing-18: -0.18px;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+  --duration-0: 0s;
+  --duration-100: 0.1s;
+  --duration-150: 0.15s;
+  --duration-200: 0.2s;
+  --duration-300: 0.3s;
+  --duration-800: 0.8s;
+  --easing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --easing-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --easing-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --opacity-50: 0.5;
+  --color-bg-surface-default: var(--color-gray-900); /** Panels: order form, cards */
+  --color-bg-surface-sunken: var(--color-alpha-white-10); /** Wells set into a surface: inputs, tracks */
+  --color-bg-surface-inverse: var(--color-white); /** Small light elements on dark: thumbs, knobs */
+  --color-bg-neutral-default: var(--color-alpha-white-10);
+  --color-bg-neutral-hover: var(--color-alpha-white-20);
+  --color-bg-neutral-pressed: var(--color-alpha-white-30);
+  --color-bg-neutral-selected: var(--color-alpha-white-20);
+  --color-bg-neutral-disabled: var(--color-alpha-white-5);
+  --color-bg-inverse-default: var(--color-gray-100);
+  --color-bg-inverse-hover: var(--color-alpha-white-80);
+  --color-bg-inverse-pressed: var(--color-gray-300);
+  --color-bg-inverse-disabled: var(--color-alpha-white-10);
+  --color-bg-success-bold-default: var(--color-green-300);
+  --color-bg-success-bold-hover: var(--color-green-200);
+  --color-bg-success-bold-pressed: var(--color-green-400);
+  --color-bg-success-bold-disabled: var(--color-alpha-white-10);
+  --color-bg-danger-bold-default: var(--color-red-300);
+  --color-bg-danger-bold-hover: var(--color-red-200);
+  --color-bg-danger-bold-pressed: var(--color-red-400);
+  --color-bg-danger-bold-disabled: var(--color-alpha-white-10);
+  --color-bg-danger-subtle-default: var(--color-red-600);
+  --color-bg-warning-subtle-default: var(--color-orange-600);
+  --color-bg-info-subtle-default: var(--color-blue-600);
+  --color-bg-discovery-subtle-default: var(--color-purple-500); /** Promotions and new things: fee discount */
+  --color-fg-primary: var(--color-white); /** Values and active labels. 18.4:1 on surface */
+  --color-fg-secondary: var(--color-gray-300); /** Labels. 8.6:1 */
+  --color-fg-tertiary: var(--color-gray-400); /** Hints, empty values. 4.7:1 (was #626262 at 3.0:1) */
+  --color-fg-disabled: var(--color-gray-500); /** Disabled text and placeholders only. Exempt from 4.5:1 */
+  --color-fg-inverse: var(--color-black); /** Text on bold and inverse fills */
+  --color-fg-success: var(--color-green-200);
+  --color-fg-danger: var(--color-red-200);
+  --color-fg-warning: var(--color-orange-200);
+  --color-fg-info: var(--color-blue-200);
+  --color-fg-discovery: var(--color-purple-200);
+  --color-border-default: var(--color-gray-700);
+  --color-border-subtle: var(--color-gray-800);
+  --color-border-focus: var(--color-white); /** Keyboard focus ring */
+  --color-border-danger: var(--color-red-200);
+  --color-border-warning: var(--color-alpha-orange-30);
+  --font-family-numeric: var(--font-family-gellix); /** Font for numbers: values, inputs, prices. Words stay in the label font. */
+  --border-width-default: var(--border-width-1);
+  --border-width-focus: var(--border-width-2);
+  --opacity-muted: var(--opacity-50); /** Decorative layers shown at half strength (slider ramp) */
+  --space-inset-sm: var(--dimension-8);
+  --space-inset-md: var(--dimension-12);
+  --space-stack-xs: var(--dimension-4);
+  --space-stack-sm: var(--dimension-8);
+  --space-stack-lg: var(--dimension-16);
+  --space-inline-2xs: var(--dimension-2);
+  --space-inline-xs: var(--dimension-4);
+  --space-inline-sm: var(--dimension-8);
+  --size-control-xs: var(--dimension-20); /** Inline pickers inside a field: unit toggle */
+  --size-control-sm: var(--dimension-28); /** Compact controls: segmented items, chips */
+  --size-control-md: var(--dimension-36); /** Default controls: tabs, fields */
+  --size-control-lg: var(--dimension-44); /** Primary input and action */
+  --size-icon-xs: var(--dimension-12); /** Knobs and small glyphs */
+  --size-icon-md: var(--dimension-20);
+  --size-target-min: var(--dimension-24); /** Minimum hit area. WCAG 2.2 · 2.5.8 */
+  --size-tick-width: var(--dimension-2);
+  --size-tick-height: var(--dimension-16);
+  --size-handle-width: var(--dimension-11);
+  --size-handle-height: var(--dimension-16);
+  --size-knob: var(--dimension-16); /** Round thumb inside an xs control with 2px padding: size.control.xs minus 4 (switch) */
+  --size-grip-width: var(--dimension-1);
+  --size-grip-height: var(--dimension-8);
+  --radius-control-sm: var(--dimension-4); /** Small standalone controls: badges, icon buttons, slider thumb */
+  --radius-control-nested: var(--dimension-6); /** An item inside a padded track (tab, segment indicator): radius.control minus the 2px track padding (8→6 Classic, 12→10 Modern), so the corners stay concentric */
+  --radius-control: var(--dimension-8);
+  --radius-container: var(--dimension-16);
+  --radius-pill: var(--dimension-9999);
+  --type-label-xs: var(--font-weight-medium) var(--font-size-12)/var(--font-line-height-normal) var(--font-family-gellix);
+  --type-label-xs-font-family: var(--font-family-gellix);
+  --type-label-xs-font-weight: var(--font-weight-medium);
+  --type-label-xs-font-size: var(--font-size-12);
+  --type-label-xs-line-height: var(--font-line-height-normal);
+  --type-label-xs-letter-spacing: var(--font-letter-spacing-12);
+  --type-label-sm: var(--font-weight-medium) var(--font-size-14)/var(--font-line-height-normal) var(--font-family-gellix);
+  --type-label-sm-font-family: var(--font-family-gellix);
+  --type-label-sm-font-weight: var(--font-weight-medium);
+  --type-label-sm-font-size: var(--font-size-14);
+  --type-label-sm-line-height: var(--font-line-height-normal);
+  --type-label-sm-letter-spacing: var(--font-letter-spacing-14);
+  --type-label-md: var(--font-weight-medium) var(--font-size-16)/var(--font-line-height-normal) var(--font-family-gellix);
+  --type-label-md-font-family: var(--font-family-gellix);
+  --type-label-md-font-weight: var(--font-weight-medium);
+  --type-label-md-font-size: var(--font-size-16);
+  --type-label-md-line-height: var(--font-line-height-normal);
+  --type-label-md-letter-spacing: var(--font-letter-spacing-16);
+  --motion-duration-feedback: var(--duration-100); /** Press, hover: must feel instant */
+  --motion-duration-state: var(--duration-150); /** Colour and value changes (production default) */
+  --motion-duration-move: var(--duration-200); /** Something travels: Long/Short indicator, slider snap */
+  --motion-duration-reveal: var(--duration-200); /** Content appears or collapses: TP/SL, inline errors */
+  --motion-duration-sheet: var(--duration-300); /** Large surfaces: mobile order sheet */
+  --motion-duration-loop: var(--duration-800); /** One turn of a continuous indicator (spinner). Kept in Reduced mode: it is essential feedback. */
+  --motion-easing-standard: var(--easing-ease-in-out); /** On-screen changes */
+  --motion-easing-enter: var(--easing-ease-out); /** Appearing */
+  --motion-easing-exit: var(--easing-ease-in); /** Leaving */
+  --motion-easing-emphasized: var(--easing-ease-out-expo); /** Quick start, soft settle: travel and sheets */
+  --elevation-handle: var(--dimension-0) var(--dimension-0) var(--dimension-2) var(--dimension-0) var(--color-alpha-black-30); /** Separates a light knob from a light track */
+  --elevation-glow: var(--dimension-0) var(--dimension-0) var(--dimension-12) var(--dimension-0) var(--color-alpha-white-20); /** Soft light halo for a disabled handle (original: 10px; snapped to the 12 step) */
+  --type-value-xs: var(--font-weight-medium) var(--font-size-12)/var(--font-line-height-normal) var(--font-family-numeric);
+  --type-value-xs-font-family: var(--font-family-numeric);
+  --type-value-xs-font-weight: var(--font-weight-medium);
+  --type-value-xs-font-size: var(--font-size-12);
+  --type-value-xs-line-height: var(--font-line-height-normal);
+  --type-value-xs-letter-spacing: var(--font-letter-spacing-12);
+  --type-value-sm: var(--font-weight-medium) var(--font-size-14)/var(--font-line-height-normal) var(--font-family-numeric);
+  --type-value-sm-font-family: var(--font-family-numeric);
+  --type-value-sm-font-weight: var(--font-weight-medium);
+  --type-value-sm-font-size: var(--font-size-14);
+  --type-value-sm-line-height: var(--font-line-height-normal);
+  --type-value-sm-letter-spacing: var(--font-letter-spacing-14);
+  --type-value-md: var(--font-weight-medium) var(--font-size-16)/var(--font-line-height-normal) var(--font-family-numeric); /** Amount input. 16px also prevents iOS zoom on focus. */
+  --type-value-md-font-family: var(--font-family-numeric);
+  --type-value-md-font-weight: var(--font-weight-medium);
+  --type-value-md-font-size: var(--font-size-16);
+  --type-value-md-line-height: var(--font-line-height-normal);
+  --type-value-md-letter-spacing: var(--font-letter-spacing-16);
+  --type-value-lg: var(--font-weight-medium) var(--font-size-18)/var(--font-line-height-normal) var(--font-family-numeric); /** Order amount: the one number the trader types on every order */
+  --type-value-lg-font-family: var(--font-family-numeric);
+  --type-value-lg-font-weight: var(--font-weight-medium);
+  --type-value-lg-font-size: var(--font-size-18);
+  --type-value-lg-line-height: var(--font-line-height-normal);
+  --type-value-lg-letter-spacing: var(--font-letter-spacing-18);
+  --button-primary-bg-neutral-default: var(--color-bg-inverse-default);
+  --button-primary-bg-neutral-hover: var(--color-bg-inverse-hover);
+  --button-primary-bg-neutral-pressed: var(--color-bg-inverse-pressed);
+  --button-primary-bg-neutral-disabled: var(--color-bg-inverse-disabled);
+  --button-primary-bg-success-default: var(--color-bg-success-bold-default);
+  --button-primary-bg-success-hover: var(--color-bg-success-bold-hover);
+  --button-primary-bg-success-pressed: var(--color-bg-success-bold-pressed);
+  --button-primary-bg-success-disabled: var(--color-bg-success-bold-disabled);
+  --button-primary-bg-danger-default: var(--color-bg-danger-bold-default);
+  --button-primary-bg-danger-hover: var(--color-bg-danger-bold-hover);
+  --button-primary-bg-danger-pressed: var(--color-bg-danger-bold-pressed);
+  --button-primary-bg-danger-disabled: var(--color-bg-danger-bold-disabled);
+  --button-primary-fg-default: var(--color-fg-inverse);
+  --button-primary-fg-disabled: var(--color-fg-disabled);
+  --button-primary-height: var(--size-control-lg);
+  --button-primary-radius: var(--radius-control);
+  --button-primary-type: var(--type-label-sm);
+  --button-secondary-bg-default: var(--color-bg-neutral-default);
+  --button-secondary-bg-hover: var(--color-bg-neutral-hover);
+  --button-secondary-bg-pressed: var(--color-bg-neutral-pressed);
+  --button-secondary-bg-disabled: var(--color-bg-neutral-disabled);
+  --button-secondary-fg-default: var(--color-fg-primary);
+  --button-secondary-fg-disabled: var(--color-fg-disabled);
+  --button-secondary-height: var(--size-control-sm);
+  --button-secondary-padding-inline: var(--space-inset-sm);
+  --button-secondary-radius: var(--radius-control);
+  --button-tertiary-bg-hover: var(--color-bg-neutral-hover);
+  --button-tertiary-bg-pressed: var(--color-bg-neutral-pressed);
+  --button-tertiary-fg-default: var(--color-fg-secondary);
+  --button-tertiary-fg-hover: var(--color-fg-primary);
+  --button-tertiary-fg-disabled: var(--color-fg-disabled);
+  --button-tertiary-radius: var(--radius-control-sm);
+  --button-tertiary-size-sm: var(--size-target-min); /** Icon-only, size sm: square hit area */
+  --button-tertiary-size-xs: var(--size-icon-md); /** Icon-only, size xs (20). Hit area extended to size.target.min in code */
+  --tabs-track-bg: var(--color-bg-surface-sunken);
+  --tabs-track-padding: var(--space-inline-2xs);
+  --tabs-track-radius: var(--radius-control);
+  --tabs-item-bg-hover: var(--color-bg-neutral-hover);
+  --tabs-item-bg-selected: var(--color-bg-neutral-selected);
+  --tabs-item-fg-default: var(--color-fg-secondary);
+  --tabs-item-fg-hover: var(--color-fg-primary);
+  --tabs-item-fg-selected: var(--color-fg-primary);
+  --tabs-item-fg-disabled: var(--color-fg-disabled);
+  --tabs-item-height: var(--size-control-sm);
+  --tabs-item-padding-inline: var(--space-inset-sm);
+  --tabs-item-radius: var(--radius-control-nested);
+  --tabs-item-type: var(--type-label-xs);
+  --toggle-group-track-bg: var(--color-bg-surface-sunken);
+  --toggle-group-track-padding: var(--space-inline-2xs);
+  --toggle-group-track-radius: var(--radius-pill);
+  --toggle-group-item-bg-hover: var(--color-bg-neutral-hover);
+  --toggle-group-item-bg-selected: var(--color-bg-neutral-selected);
+  --toggle-group-item-fg-default: var(--color-fg-secondary);
+  --toggle-group-item-fg-hover: var(--color-fg-primary);
+  --toggle-group-item-fg-selected: var(--color-fg-primary);
+  --toggle-group-item-fg-disabled: var(--color-fg-disabled);
+  --toggle-group-item-height: var(--size-control-xs);
+  --toggle-group-item-padding-inline: var(--space-inset-sm);
+  --toggle-group-item-radius: var(--radius-pill);
+  --toggle-group-item-type: var(--type-label-xs);
+  --segmented-control-track-bg: var(--color-bg-surface-sunken);
+  --segmented-control-track-padding: var(--space-inline-2xs);
+  --segmented-control-track-radius: var(--radius-control);
+  --segmented-control-indicator-bg-success: var(--color-bg-success-bold-default);
+  --segmented-control-indicator-bg-danger: var(--color-bg-danger-bold-default);
+  --segmented-control-indicator-bg-neutral: var(--color-bg-neutral-selected);
+  --segmented-control-indicator-radius: var(--radius-control-nested);
+  --segmented-control-label-fg-default: var(--color-fg-secondary);
+  --segmented-control-label-fg-hover: var(--color-fg-primary);
+  --segmented-control-label-fg-selected: var(--color-fg-inverse);
+  --segmented-control-label-fg-selected-neutral: var(--color-fg-primary);
+  --segmented-control-label-type: var(--type-label-sm);
+  --segmented-control-height: var(--size-control-md);
+  --label-fg-subdued: var(--color-fg-secondary);
+  --label-fg-default: var(--color-fg-primary);
+  --label-fg-muted: var(--color-fg-tertiary); /** Empty values */
+  --label-fg-success: var(--color-fg-success);
+  --label-fg-danger: var(--color-fg-danger);
+  --label-trigger-underline: var(--color-fg-tertiary); /** Dotted underline on a label that opens a modal or tooltip */
+  --label-type-xs: var(--type-label-xs);
+  --label-type-sm: var(--type-label-sm);
+  --input-bg-default: var(--color-bg-surface-sunken);
+  --input-bg-hover: var(--color-bg-neutral-hover);
+  --input-bg-disabled: var(--color-bg-neutral-disabled);
+  --input-border-focus: var(--color-border-focus);
+  --input-border-error: var(--color-border-danger);
+  --input-border-width: var(--border-width-default);
+  --input-fg-label: var(--color-fg-secondary);
+  --input-fg-value: var(--color-fg-primary);
+  --input-fg-placeholder: var(--color-fg-disabled);
+  --input-fg-helper: var(--color-fg-tertiary);
+  --input-fg-error: var(--color-fg-danger);
+  --input-height-md: var(--size-control-md);
+  --input-height-lg: var(--size-control-lg);
+  --input-padding-inline: var(--space-inset-md);
+  --input-radius: var(--radius-control);
+  --input-type-label: var(--type-label-sm);
+  --slider-height: var(--size-icon-md);
+  --slider-target: var(--size-target-min);
+  --slider-tick-fill: var(--color-fg-primary); /** Mask shape only; the ramp shows through */
+  --slider-tick-width: var(--size-tick-width);
+  --slider-tick-height: var(--size-tick-height);
+  --slider-tick-gap: var(--space-inline-2xs);
+  --slider-tick-radius: var(--radius-pill);
+  --slider-ramp-start: var(--color-border-default);
+  --slider-ramp-success: var(--color-fg-success);
+  --slider-ramp-danger: var(--color-fg-danger);
+  --slider-ramp-opacity: var(--opacity-muted);
+  --slider-thumb-bg-default: var(--color-bg-surface-inverse);
+  --slider-thumb-bg-disabled: var(--color-fg-secondary);
+  --slider-thumb-grip-default: var(--color-fg-inverse);
+  --slider-thumb-grip-disabled: var(--color-fg-primary);
+  --slider-thumb-width: var(--size-handle-width);
+  --slider-thumb-height: var(--size-handle-height);
+  --slider-thumb-radius: var(--radius-control-sm);
+  --slider-thumb-grip-width: var(--size-grip-width);
+  --slider-thumb-grip-height: var(--size-grip-height);
+  --slider-thumb-shadow: var(--elevation-handle);
+  --slider-thumb-shadow-disabled: var(--elevation-glow);
+  --switch-track-bg-off: var(--color-bg-neutral-hover);
+  --switch-track-bg-on: var(--color-bg-inverse-default);
+  --switch-track-bg-disabled: var(--color-bg-neutral-disabled);
+  --switch-track-bg-off-hover: var(--color-bg-neutral-pressed);
+  --switch-track-bg-on-hover: var(--color-bg-inverse-hover);
+  --switch-track-width: var(--size-control-md);
+  --switch-track-height: var(--size-control-xs);
+  --switch-track-padding: var(--space-inline-2xs);
+  --switch-track-radius: var(--radius-pill);
+  --switch-thumb-bg-off: var(--color-bg-surface-inverse);
+  --switch-thumb-bg-on: var(--color-bg-surface-default);
+  --switch-thumb-shadow: var(--elevation-handle);
+  --switch-thumb-size: var(--size-knob);
+  --switch-target: var(--size-target-min);
+  --divider-color: var(--color-border-default);
+  --divider-width: var(--border-width-default);
+  --divider-length: var(--size-icon-xs); /** Vertical divider height inside a row */
+  --badge-discovery-bg: var(--color-bg-discovery-subtle-default);
+  --badge-discovery-fg: var(--color-fg-discovery);
+  --badge-padding-inline: var(--space-inline-xs);
+  --badge-radius: var(--radius-control-sm);
+  --badge-type: var(--type-label-xs);
+  --badge-neutral-bg: var(--color-bg-neutral-default);
+  --badge-neutral-fg: var(--color-fg-secondary);
+  --alert-warning-bg: var(--color-bg-warning-subtle-default);
+  --alert-warning-fg: var(--color-fg-warning);
+  --alert-warning-border: var(--color-border-warning);
+  --alert-danger-bg: var(--color-bg-danger-subtle-default);
+  --alert-danger-fg: var(--color-fg-danger);
+  --alert-danger-border: var(--color-border-danger);
+  --alert-info-bg: var(--color-bg-info-subtle-default);
+  --alert-info-fg: var(--color-fg-info);
+  --alert-info-border: var(--color-border-default);
+  --alert-padding: var(--space-inset-md);
+  --alert-gap: var(--space-inline-sm);
+  --alert-radius: var(--radius-control);
+  --alert-type: var(--type-label-xs);
+  --alert-border-width: var(--border-width-default);
+  --label-value-row-gap: var(--space-inline-xs); /** Between items inside a group */
+  --label-value-row-min-height: var(--size-icon-md);
+  --details-list-gap: var(--space-stack-xs);
+  --order-type-bar-gap: var(--space-inline-sm);
+  --order-form-bg: var(--color-bg-surface-default);
+  --order-form-padding: var(--space-inset-md);
+  --order-form-gap: var(--space-stack-lg); /** Between groups */
+  --order-form-radius: var(--radius-container);
+  --order-form-item-gap: var(--space-stack-sm); /** Inside a group (v2) */
+  --order-form-inline-gap: var(--space-inline-sm); /** Side-by-side items, e.g. quick-size stops, options row */
+  --focus-ring-color: var(--color-border-focus);
+  --focus-ring-width: var(--border-width-focus);
+  --label-type-value-xs: var(--type-value-xs);
+  --label-type-value-sm: var(--type-value-sm);
+  --input-type-value: var(--type-value-md);
+  --input-type-value-lg: var(--type-value-lg);
+}
+
+/* Semantic · Layout · mode: Mobile */
+@media (max-width: 767px) {
+  :root {
+    --border-width-default: var(--border-width-1);
+    --border-width-focus: var(--border-width-2);
+    --space-inset-sm: var(--dimension-8);
+    --space-inset-md: var(--dimension-16);
+    --space-stack-xs: var(--dimension-4);
+    --space-stack-sm: var(--dimension-8);
+    --space-stack-lg: var(--dimension-20);
+    --space-inline-2xs: var(--dimension-2);
+    --space-inline-xs: var(--dimension-4);
+    --space-inline-sm: var(--dimension-8);
+    --size-control-xs: var(--dimension-24);
+    --size-control-sm: var(--dimension-32);
+    --size-control-md: var(--dimension-40);
+    --size-control-lg: var(--dimension-48);
+    --size-icon-xs: var(--dimension-12); /** Knobs and small glyphs */
+    --size-icon-md: var(--dimension-20);
+    --size-target-min: var(--dimension-44); /** Touch target (Apple HIG 44pt) */
+    --size-tick-width: var(--dimension-2);
+    --size-tick-height: var(--dimension-16);
+    --size-handle-width: var(--dimension-11);
+    --size-handle-height: var(--dimension-16);
+    --size-knob: var(--dimension-20);
+    --size-grip-width: var(--dimension-1);
+    --size-grip-height: var(--dimension-8);
+  }
+}
+
+/* Semantic · Theme · mode: Modern */
+:root[data-theme="modern"] {
+  --font-family-numeric: var(--font-family-geist-mono);
+  --radius-control-sm: var(--dimension-4);
+  --radius-control-nested: var(--dimension-10);
+  --radius-control: var(--dimension-12);
+  --radius-container: var(--dimension-16);
+  --radius-pill: var(--dimension-9999);
+}
+
+/* Semantic · Motion · mode: Reduced */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-feedback: var(--duration-0); /** Collapsed: no travel */
+    --motion-duration-state: var(--duration-100); /** Kept short: opacity and colour still change, nothing travels */
+    --motion-duration-move: var(--duration-0); /** Collapsed: no travel */
+    --motion-duration-reveal: var(--duration-100); /** Kept short: opacity and colour still change, nothing travels */
+    --motion-duration-sheet: var(--duration-0); /** Collapsed: no travel */
+    --motion-duration-loop: var(--duration-800); /** One turn of a continuous indicator (spinner). Kept in Reduced mode: it is essential feedback. */
+    --motion-easing-standard: var(--easing-ease-in-out);
+    --motion-easing-enter: var(--easing-ease-in-out);
+    --motion-easing-exit: var(--easing-ease-in-out);
+    --motion-easing-emphasized: var(--easing-ease-in-out);
+  }
+}

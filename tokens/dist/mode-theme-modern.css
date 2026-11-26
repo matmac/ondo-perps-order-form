@@ -1,0 +1,12 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --font-family-numeric: var(--font-family-geist-mono);
+  --radius-control-sm: var(--dimension-4);
+  --radius-control-nested: var(--dimension-10);
+  --radius-control: var(--dimension-12);
+  --radius-container: var(--dimension-16);
+  --radius-pill: var(--dimension-9999);
+}

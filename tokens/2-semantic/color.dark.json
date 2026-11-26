@@ -1,0 +1,176 @@
+{
+  "$description": "Tier 2 · Semantic colour, theme mode: Dark (Perps). Aliases tier 1 only. Grammar: color / property / role / emphasis / state. Fixed state set: default, hover, pressed, focus, selected, disabled.",
+  "color": {
+    "$type": "color",
+    "bg": {
+      "surface": {
+        "default": {
+          "$value": "{color.gray.900}",
+          "$description": "Panels: order form, cards"
+        },
+        "sunken": {
+          "$value": "{color.alpha.white.10}",
+          "$description": "Wells set into a surface: inputs, tracks"
+        },
+        "inverse": {
+          "$value": "{color.white}",
+          "$description": "Small light elements on dark: thumbs, knobs"
+        }
+      },
+      "neutral": {
+        "$description": "Low-emphasis interactive fills",
+        "default": {
+          "$value": "{color.alpha.white.10}"
+        },
+        "hover": {
+          "$value": "{color.alpha.white.20}"
+        },
+        "pressed": {
+          "$value": "{color.alpha.white.30}"
+        },
+        "selected": {
+          "$value": "{color.alpha.white.20}"
+        },
+        "disabled": {
+          "$value": "{color.alpha.white.5}"
+        }
+      },
+      "inverse": {
+        "$description": "High-emphasis neutral fill (primary action when no side is implied)",
+        "default": {
+          "$value": "{color.gray.100}"
+        },
+        "hover": {
+          "$value": "{color.alpha.white.80}"
+        },
+        "pressed": {
+          "$value": "{color.gray.300}"
+        },
+        "disabled": {
+          "$value": "{color.alpha.white.10}"
+        }
+      },
+      "success": {
+        "bold": {
+          "default": {
+            "$value": "{color.green.300}"
+          },
+          "hover": {
+            "$value": "{color.green.200}"
+          },
+          "pressed": {
+            "$value": "{color.green.400}"
+          },
+          "disabled": {
+            "$value": "{color.alpha.white.10}"
+          }
+        }
+      },
+      "danger": {
+        "bold": {
+          "default": {
+            "$value": "{color.red.300}"
+          },
+          "hover": {
+            "$value": "{color.red.200}"
+          },
+          "pressed": {
+            "$value": "{color.red.400}"
+          },
+          "disabled": {
+            "$value": "{color.alpha.white.10}"
+          }
+        },
+        "subtle": {
+          "default": {
+            "$value": "{color.red.600}"
+          }
+        }
+      },
+      "warning": {
+        "subtle": {
+          "default": {
+            "$value": "{color.orange.600}"
+          }
+        }
+      },
+      "info": {
+        "subtle": {
+          "default": {
+            "$value": "{color.blue.600}"
+          }
+        }
+      },
+      "discovery": {
+        "subtle": {
+          "default": {
+            "$value": "{color.purple.500}",
+            "$description": "Promotions and new things: fee discount"
+          }
+        }
+      }
+    },
+    "fg": {
+      "primary": {
+        "$value": "{color.white}",
+        "$description": "Values and active labels. 18.4:1 on surface"
+      },
+      "secondary": {
+        "$value": "{color.gray.300}",
+        "$description": "Labels. 8.6:1"
+      },
+      "tertiary": {
+        "$value": "{color.gray.400}",
+        "$description": "Hints, empty values. 4.7:1 (was #626262 at 3.0:1)"
+      },
+      "disabled": {
+        "$value": "{color.gray.500}",
+        "$description": "Disabled text and placeholders only. Exempt from 4.5:1"
+      },
+      "inverse": {
+        "$value": "{color.black}",
+        "$description": "Text on bold and inverse fills"
+      },
+      "success": {
+        "$value": "{color.green.200}"
+      },
+      "danger": {
+        "$value": "{color.red.200}"
+      },
+      "warning": {
+        "$value": "{color.orange.200}"
+      },
+      "info": {
+        "$value": "{color.blue.200}"
+      },
+      "discovery": {
+        "$value": "{color.purple.200}"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{color.gray.700}"
+      },
+      "subtle": {
+        "$value": "{color.gray.800}"
+      },
+      "focus": {
+        "$value": "{color.white}",
+        "$description": "Keyboard focus ring"
+      },
+      "danger": {
+        "$value": "{color.red.200}"
+      },
+      "warning": {
+        "$value": "{color.alpha.orange.30}"
+      }
+    }
+  },
+  "opacity": {
+    "$type": "number",
+    "muted": {
+      "$value": "{opacity.50}",
+      "$description": "Decorative layers shown at half strength (slider ramp)"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$description": "Tier 2 · Semantic theme, mode: Classic (default, :root). The only values a theme may change: corner radius and the numeric font. Same paths as theme.modern.json.",
+  "radius": {
+    "$type": "dimension",
+    "control-sm": {
+      "$value": "{dimension.4}",
+      "$description": "Small standalone controls: badges, icon buttons, slider thumb"
+    },
+    "control-nested": {
+      "$value": "{dimension.6}",
+      "$description": "An item inside a padded track (tab, segment indicator): radius.control minus the 2px track padding (8→6 Classic, 12→10 Modern), so the corners stay concentric"
+    },
+    "control": {
+      "$value": "{dimension.8}"
+    },
+    "container": {
+      "$value": "{dimension.16}"
+    },
+    "pill": {
+      "$value": "{dimension.9999}"
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "numeric": {
+        "$value": "{font.family.gellix}",
+        "$description": "Font for numbers: values, inputs, prices. Words stay in the label font."
+      }
+    }
+  }
+}

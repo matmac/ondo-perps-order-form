@@ -1,0 +1,30 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --border-width-default: var(--border-width-1);
+  --border-width-focus: var(--border-width-2);
+  --space-inset-sm: var(--dimension-8);
+  --space-inset-md: var(--dimension-16);
+  --space-stack-xs: var(--dimension-4);
+  --space-stack-sm: var(--dimension-8);
+  --space-stack-lg: var(--dimension-20);
+  --space-inline-2xs: var(--dimension-2);
+  --space-inline-xs: var(--dimension-4);
+  --space-inline-sm: var(--dimension-8);
+  --size-control-xs: var(--dimension-24);
+  --size-control-sm: var(--dimension-32);
+  --size-control-md: var(--dimension-40);
+  --size-control-lg: var(--dimension-48);
+  --size-icon-xs: var(--dimension-12); /** Knobs and small glyphs */
+  --size-icon-md: var(--dimension-20);
+  --size-target-min: var(--dimension-44); /** Touch target (Apple HIG 44pt) */
+  --size-tick-width: var(--dimension-2);
+  --size-tick-height: var(--dimension-16);
+  --size-handle-width: var(--dimension-11);
+  --size-handle-height: var(--dimension-16);
+  --size-knob: var(--dimension-20);
+  --size-grip-width: var(--dimension-1);
+  --size-grip-height: var(--dimension-8);
+}
