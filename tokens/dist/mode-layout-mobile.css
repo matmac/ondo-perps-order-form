@@ -18,6 +18,7 @@
   --size-control-md: var(--dimension-40);
   --size-control-lg: var(--dimension-48);
   --size-icon-xs: var(--dimension-12); /** Knobs and small glyphs */
+  --size-icon-sm: var(--dimension-16);
   --size-icon-md: var(--dimension-20);
   --size-target-min: var(--dimension-44); /** Touch target (Apple HIG 44pt) */
   --size-tick-width: var(--dimension-2);

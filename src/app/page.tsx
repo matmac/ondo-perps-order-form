@@ -6,7 +6,8 @@ export default function Home() {
     <main style={{ padding: "var(--space-stack-lg)", display: "grid", gap: "var(--space-stack-sm)" }}>
       <p className="type-label-md" style={{ color: "var(--color-fg-secondary)" }}>Ondo Perps · Order form</p>
       <p className="type-value-lg">$68,420.5</p>
-      <Link href="/tokens" className="type-label-sm" style={{ color: "var(--color-fg-info)" }}>Token check →</Link>
+      <Link href="/tokens" className="type-label-sm" style={{ color: "var(--color-fg-info)" }}>Tokens →</Link>
+      <Link href="/components" className="type-label-sm" style={{ color: "var(--color-fg-info)" }}>Components →</Link>
     </main>
   );
 }

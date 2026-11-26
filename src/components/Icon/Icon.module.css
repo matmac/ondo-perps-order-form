@@ -1,0 +1,8 @@
+.icon {
+  flex: none;
+  display: block;
+  width: var(--size-icon-md);
+  height: var(--size-icon-md);
+}
+.icon[data-size="sm"] { width: var(--size-icon-sm); height: var(--size-icon-sm); }
+.icon[data-size="xs"] { width: var(--size-icon-xs); height: var(--size-icon-xs); }

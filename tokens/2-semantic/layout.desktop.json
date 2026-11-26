@@ -61,6 +61,10 @@
         "$value": "{dimension.12}",
         "$description": "Knobs and small glyphs"
       },
+      "sm": {
+        "$value": "{dimension.16}",
+        "$description": "Icons inside controls: buttons, alerts"
+      },
       "md": {
         "$value": "{dimension.20}"
       }

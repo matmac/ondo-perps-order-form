@@ -132,6 +132,7 @@
   --size-control-md: var(--dimension-36); /** Default controls: tabs, fields */
   --size-control-lg: var(--dimension-44); /** Primary input and action */
   --size-icon-xs: var(--dimension-12); /** Knobs and small glyphs */
+  --size-icon-sm: var(--dimension-16); /** Icons inside controls: buttons, alerts */
   --size-icon-md: var(--dimension-20);
   --size-target-min: var(--dimension-24); /** Minimum hit area. WCAG 2.2 · 2.5.8 */
   --size-tick-width: var(--dimension-2);
@@ -393,6 +394,7 @@
     --size-control-md: var(--dimension-40);
     --size-control-lg: var(--dimension-48);
     --size-icon-xs: var(--dimension-12); /** Knobs and small glyphs */
+    --size-icon-sm: var(--dimension-16);
     --size-icon-md: var(--dimension-20);
     --size-target-min: var(--dimension-44); /** Touch target (Apple HIG 44pt) */
     --size-tick-width: var(--dimension-2);

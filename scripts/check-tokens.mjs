@@ -20,7 +20,8 @@ walk("src");
 const missing = [];
 for (const f of files) {
   const src = readFileSync(f, "utf8");
-  for (const m of src.matchAll(/var\((--[\w-]+)/g)) if (!defined.has(m[1])) missing.push(`${f}: ${m[1]}`);
+  // --_name is a private variable a component sets for itself (per variant), never a token.
+  for (const m of src.matchAll(/var\((--(?!_)[\w-]+)/g)) if (!defined.has(m[1])) missing.push(`${f}: ${m[1]}`);
 }
 if (missing.length) {
   console.error(`Unknown tokens:\n${missing.join("\n")}`);

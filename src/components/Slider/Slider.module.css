@@ -1,0 +1,57 @@
+.root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--slider-target);
+}
+
+/* Ticks are a mask over one gradient: start colour into the tone, then the tone to the end. */
+.ramp {
+  width: 100%;
+  height: var(--slider-tick-height);
+  opacity: var(--slider-ramp-opacity);
+  background: linear-gradient(to right, var(--slider-ramp-start), var(--_tone) 53%);
+  mask: repeating-linear-gradient(
+    to right,
+    #000 0 var(--slider-tick-width),
+    transparent var(--slider-tick-width) calc(var(--slider-tick-width) + var(--slider-tick-gap))
+  );
+}
+.root[data-tone="success"] { --_tone: var(--slider-ramp-success); }
+.root[data-tone="danger"] { --_tone: var(--slider-ramp-danger); }
+
+.thumb {
+  position: absolute;
+  left: calc((100% - var(--slider-thumb-width)) * var(--_pct));
+  display: grid;
+  place-items: center;
+  width: var(--slider-thumb-width);
+  height: var(--slider-thumb-height);
+  border-radius: var(--slider-thumb-radius);
+  background: var(--slider-thumb-bg-default);
+  box-shadow: var(--slider-thumb-shadow);
+  pointer-events: none;
+}
+.grip {
+  width: var(--slider-thumb-grip-width);
+  height: var(--slider-thumb-grip-height);
+  background: var(--slider-thumb-grip-default);
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.input:focus-visible + .thumb {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--space-inline-2xs);
+}
+
+.root[data-disabled] .input { cursor: not-allowed; }
+.root[data-disabled] .thumb { background: var(--slider-thumb-bg-disabled); box-shadow: var(--slider-thumb-shadow-disabled); }
+.root[data-disabled] .grip { background: var(--slider-thumb-grip-disabled); }

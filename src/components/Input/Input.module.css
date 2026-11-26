@@ -1,0 +1,70 @@
+.root {
+  display: grid;
+  gap: var(--space-stack-xs);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-inline-xs);
+  height: var(--input-height-lg);
+  padding-inline: var(--input-padding-inline);
+  border-radius: var(--input-radius);
+  background: var(--input-bg-default);
+  cursor: text;
+  /* inset stroke, so focus and error never move the layout */
+  box-shadow: inset 0 0 0 var(--input-border-width) var(--_border, transparent);
+  transition-property: background-color, box-shadow;
+  transition-duration: var(--motion-duration-state);
+  transition-timing-function: var(--motion-easing-standard);
+}
+.field:hover { background: var(--input-bg-hover); }
+.field:has(.input:focus-visible) { --_border: var(--input-border-focus); }
+.field[data-error] { --_border: var(--input-border-error); }
+.field[data-disabled] { background: var(--input-bg-disabled); cursor: not-allowed; }
+
+.label {
+  flex: 1;
+  min-width: 0;
+  font: var(--input-type-label);
+  letter-spacing: var(--type-label-sm-letter-spacing);
+  color: var(--input-fg-label);
+  white-space: nowrap;
+  cursor: inherit;
+}
+
+.input {
+  flex: 1 1 0;
+  min-width: 0;
+  background: none;
+  border: 0;
+  outline: none;
+  text-align: right;
+  font: var(--input-type-value-lg);
+  letter-spacing: var(--type-value-lg-letter-spacing);
+  font-variant-numeric: tabular-nums;
+  color: var(--input-fg-value);
+}
+.input::placeholder { color: var(--input-fg-placeholder); }
+.input:disabled { color: var(--input-fg-placeholder); cursor: not-allowed; }
+
+.unit {
+  flex: none;
+  font: var(--input-type-label);
+  letter-spacing: var(--type-label-sm-letter-spacing);
+  color: var(--input-fg-value);
+}
+.field[data-disabled] .label,
+.field[data-disabled] .unit { color: var(--input-fg-placeholder); }
+
+.field[data-size="md"] { height: var(--input-height-md); }
+.field[data-size="md"] .label,
+.field[data-size="md"] .unit { font: var(--type-label-xs); letter-spacing: var(--type-label-xs-letter-spacing); }
+.field[data-size="md"] .input { font: var(--input-type-value); letter-spacing: var(--type-value-md-letter-spacing); }
+
+.message {
+  font: var(--type-label-xs);
+  letter-spacing: var(--type-label-xs-letter-spacing);
+  color: var(--input-fg-helper);
+}
+.message[data-error] { color: var(--input-fg-error); }

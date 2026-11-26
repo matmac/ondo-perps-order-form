@@ -1,0 +1,40 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  min-height: var(--switch-target);
+  border-radius: var(--switch-track-radius);
+}
+.root:focus-visible { outline-offset: 0; }
+
+.track {
+  display: flex;
+  width: var(--switch-track-width);
+  height: var(--switch-track-height);
+  padding: var(--switch-track-padding);
+  border-radius: var(--switch-track-radius);
+  background: var(--switch-track-bg-off);
+  transition: background-color var(--motion-duration-state) var(--motion-easing-standard);
+}
+
+.thumb {
+  width: var(--switch-thumb-size);
+  height: var(--switch-thumb-size);
+  border-radius: var(--switch-track-radius);
+  background: var(--switch-thumb-bg-off);
+  box-shadow: var(--switch-thumb-shadow);
+  transition-property: transform, background-color;
+  transition-duration: var(--motion-duration-move);
+  transition-timing-function: var(--motion-easing-standard);
+}
+
+.root:hover .track { background: var(--switch-track-bg-off-hover); }
+.root[aria-checked="true"] .track { background: var(--switch-track-bg-on); }
+.root[aria-checked="true"]:hover .track { background: var(--switch-track-bg-on-hover); }
+.root[aria-checked="true"] .thumb {
+  background: var(--switch-thumb-bg-on);
+  transform: translateX(calc(var(--switch-track-width) - var(--switch-thumb-size) - var(--switch-track-padding) * 2));
+}
+.root[aria-disabled="true"] { cursor: not-allowed; }
+.root[aria-disabled="true"] .track { background: var(--switch-track-bg-disabled); }
+.root[aria-disabled="true"] .thumb { background: var(--color-fg-disabled); box-shadow: none; }

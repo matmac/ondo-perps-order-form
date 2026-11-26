@@ -1,0 +1,112 @@
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  white-space: nowrap;
+  user-select: none;
+  background: var(--_bg);
+  color: var(--_fg);
+  transition-property: background-color, color;
+  transition-duration: var(--motion-duration-state);
+  transition-timing-function: var(--motion-easing-standard);
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-inline-xs);
+}
+
+/* primary: full width, 44, tones */
+.button[data-variant="primary"] {
+  width: 100%;
+  height: var(--button-primary-height);
+  border-radius: var(--button-primary-radius);
+  font: var(--button-primary-type);
+  letter-spacing: var(--type-label-sm-letter-spacing);
+  --_fg: var(--button-primary-fg-default);
+}
+.button[data-tone="neutral"] {
+  --_bg: var(--button-primary-bg-neutral-default);
+  --_bg-hover: var(--button-primary-bg-neutral-hover);
+  --_bg-pressed: var(--button-primary-bg-neutral-pressed);
+  --_bg-disabled: var(--button-primary-bg-neutral-disabled);
+}
+.button[data-tone="success"] {
+  --_bg: var(--button-primary-bg-success-default);
+  --_bg-hover: var(--button-primary-bg-success-hover);
+  --_bg-pressed: var(--button-primary-bg-success-pressed);
+  --_bg-disabled: var(--button-primary-bg-success-disabled);
+}
+.button[data-tone="danger"] {
+  --_bg: var(--button-primary-bg-danger-default);
+  --_bg-hover: var(--button-primary-bg-danger-hover);
+  --_bg-pressed: var(--button-primary-bg-danger-pressed);
+  --_bg-disabled: var(--button-primary-bg-danger-disabled);
+}
+.button[data-variant="primary"]:hover { background: var(--_bg-hover); }
+.button[data-variant="primary"]:active { background: var(--_bg-pressed); }
+.button[data-variant="primary"][aria-disabled="true"] {
+  background: var(--_bg-disabled);
+  color: var(--button-primary-fg-disabled);
+}
+
+/* secondary: 28, neutral fill */
+.button[data-variant="secondary"] {
+  height: var(--button-secondary-height);
+  padding-inline: var(--button-secondary-padding-inline);
+  border-radius: var(--button-secondary-radius);
+  font: var(--type-label-xs);
+  letter-spacing: var(--type-label-xs-letter-spacing);
+  --_bg: var(--button-secondary-bg-default);
+  --_fg: var(--button-secondary-fg-default);
+}
+.button[data-variant="secondary"]:hover { background: var(--button-secondary-bg-hover); }
+.button[data-variant="secondary"]:active { background: var(--button-secondary-bg-pressed); }
+.button[data-variant="secondary"][aria-disabled="true"] {
+  background: var(--button-secondary-bg-disabled);
+  color: var(--button-secondary-fg-disabled);
+}
+
+/* tertiary: no fill until hover, 24 (sm) or 20 (xs) */
+.button[data-variant="tertiary"] {
+  height: var(--button-tertiary-size-sm);
+  min-width: var(--button-tertiary-size-sm);
+  padding-inline: var(--space-inline-xs);
+  border-radius: var(--button-tertiary-radius);
+  font: var(--type-label-xs);
+  letter-spacing: var(--type-label-xs-letter-spacing);
+  --_bg: transparent;
+  --_fg: var(--button-tertiary-fg-default);
+}
+.button[data-variant="tertiary"][data-size="xs"] {
+  height: var(--button-tertiary-size-xs);
+  min-width: var(--button-tertiary-size-xs);
+}
+.button[data-variant="tertiary"][data-icon-only] { padding-inline: 0; }
+.button[data-variant="tertiary"]:hover { background: var(--button-tertiary-bg-hover); color: var(--button-tertiary-fg-hover); }
+.button[data-variant="tertiary"]:active { background: var(--button-tertiary-bg-pressed); }
+.button[data-variant="tertiary"][aria-disabled="true"] { background: transparent; color: var(--button-tertiary-fg-disabled); }
+
+.button[aria-disabled="true"],
+.button[data-loading] { cursor: not-allowed; }
+
+/* loading keeps the width: label hides, spinner sits on top */
+.button[data-loading] .content { visibility: hidden; }
+.spinner {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  border-radius: var(--radius-pill);
+  border: var(--border-width-focus) solid currentColor;
+  border-right-color: transparent;
+  animation: spin var(--motion-duration-loop) linear infinite;
+}
+@keyframes spin { to { transform: rotate(1turn); } }
+@media (prefers-reduced-motion: reduce) {
+  .spinner { animation-duration: calc(var(--motion-duration-loop) * 3); }
+}

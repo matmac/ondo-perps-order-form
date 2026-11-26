@@ -1,0 +1,21 @@
+.label {
+  font: var(--label-type-xs);
+  letter-spacing: var(--type-label-xs-letter-spacing);
+  white-space: nowrap;
+}
+.label[data-size="sm"] { font: var(--label-type-sm); letter-spacing: var(--type-label-sm-letter-spacing); }
+.label[data-numeric] { font: var(--label-type-value-xs); letter-spacing: var(--type-value-xs-letter-spacing); font-variant-numeric: tabular-nums; }
+.label[data-numeric][data-size="sm"] { font: var(--label-type-value-sm); letter-spacing: var(--type-value-sm-letter-spacing); }
+
+.label[data-tone="subdued"] { color: var(--label-fg-subdued); }
+.label[data-tone="default"] { color: var(--label-fg-default); }
+.label[data-tone="muted"] { color: var(--label-fg-muted); }
+.label[data-tone="success"] { color: var(--label-fg-success); }
+.label[data-tone="danger"] { color: var(--label-fg-danger); }
+
+.label[data-trigger] {
+  text-decoration: underline dotted var(--label-trigger-underline);
+  text-decoration-thickness: var(--border-width-default);
+  text-underline-offset: var(--space-inline-2xs);
+  cursor: help;
+}
