@@ -3,7 +3,7 @@
   grid-template-columns: minmax(0, 1fr);
   gap: var(--order-form-gap);
   width: 100%;
-  max-width: 310px;
+  max-width: var(--order-form-width);
   padding: var(--order-form-padding);
   border-radius: var(--order-form-radius);
   background: var(--order-form-bg);

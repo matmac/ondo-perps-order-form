@@ -50,6 +50,10 @@
   --dimension-40: 40px;
   --dimension-44: 44px;
   --dimension-48: 48px;
+  --dimension-310: 310px;
+  --dimension-360: 360px;
+  --dimension-720: 720px;
+  --dimension-1120: 1120px;
   --dimension-9999: 9999px;
   --font-family-gellix: Gellix, system-ui, sans-serif;
   --font-family-geist-mono: 'Geist Mono', ui-monospace, monospace;
@@ -70,12 +74,16 @@
   --duration-150: 0.15s;
   --duration-200: 0.2s;
   --duration-300: 0.3s;
+  --duration-600: 0.6s;
   --duration-800: 0.8s;
+  --duration-3000: 3s;
   --easing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   --easing-ease-out: cubic-bezier(0, 0, 0.2, 1);
   --easing-ease-in: cubic-bezier(0.4, 0, 1, 1);
   --easing-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --opacity-50: 0.5;
+  --scale-98: 0.98;
+  --scale-100: 1;
   --color-bg-surface-default: var(--color-gray-900); /** Panels: order form, cards */
   --color-bg-surface-sunken: var(--color-alpha-white-10); /** Wells set into a surface: inputs, tracks */
   --color-bg-surface-inverse: var(--color-white); /** Small light elements on dark: thumbs, knobs */
@@ -142,6 +150,10 @@
   --size-knob: var(--dimension-16); /** Round thumb inside an xs control with 2px padding: size.control.xs minus 4 (switch) */
   --size-grip-width: var(--dimension-1);
   --size-grip-height: var(--dimension-8);
+  --size-container-sm: var(--dimension-310); /** Narrow panel: the order form */
+  --size-container-md: var(--dimension-360); /** Side sheet or secondary column */
+  --size-container-lg: var(--dimension-720); /** Single-column page */
+  --size-container-xl: var(--dimension-1120); /** Wide page */
   --radius-control-sm: var(--dimension-4); /** Small standalone controls: badges, icon buttons, slider thumb */
   --radius-control-nested: var(--dimension-6); /** An item inside a padded track (tab, segment indicator): radius.control minus the 2px track padding (8→6 Classic, 12→10 Modern), so the corners stay concentric */
   --radius-control: var(--dimension-8);
@@ -171,10 +183,13 @@
   --motion-duration-reveal: var(--duration-200); /** Content appears or collapses: TP/SL, inline errors */
   --motion-duration-sheet: var(--duration-300); /** Large surfaces: mobile order sheet */
   --motion-duration-loop: var(--duration-800); /** One turn of a continuous indicator (spinner). Kept in Reduced mode: it is essential feedback. */
+  --motion-duration-notice: var(--duration-3000); /** How long a transient notice (toast) stays before it leaves on its own */
   --motion-easing-standard: var(--easing-ease-in-out); /** On-screen changes */
   --motion-easing-enter: var(--easing-ease-out); /** Appearing */
   --motion-easing-exit: var(--easing-ease-in); /** Leaving */
   --motion-easing-emphasized: var(--easing-ease-out-expo); /** Quick start, soft settle: travel and sheets */
+  --motion-delay-validate: var(--duration-600); /** Pause before a soft validation error (below minimum) shows while typing */
+  --motion-scale-press: var(--scale-98); /** Pressed control shrinks slightly */
   --elevation-handle: var(--dimension-0) var(--dimension-0) var(--dimension-2) var(--dimension-0) var(--color-alpha-black-30); /** Separates a light knob from a light track */
   --elevation-glow: var(--dimension-0) var(--dimension-0) var(--dimension-12) var(--dimension-0) var(--color-alpha-white-20); /** Soft light halo for a disabled handle (original: 10px; snapped to the 12 step) */
   --type-value-xs: var(--font-weight-medium) var(--font-size-12)/var(--font-line-height-normal) var(--font-family-numeric);
@@ -218,6 +233,7 @@
   --button-primary-height: var(--size-control-lg);
   --button-primary-radius: var(--radius-control);
   --button-primary-type: var(--type-label-sm);
+  --button-primary-scale-pressed: var(--motion-scale-press); /** Press feedback on the trade CTA */
   --button-secondary-bg-default: var(--color-bg-neutral-default);
   --button-secondary-bg-hover: var(--color-bg-neutral-hover);
   --button-secondary-bg-pressed: var(--color-bg-neutral-pressed);
@@ -238,7 +254,6 @@
   --tabs-track-bg: var(--color-bg-surface-sunken);
   --tabs-track-padding: var(--space-inline-2xs);
   --tabs-track-radius: var(--radius-control);
-  --tabs-item-bg-hover: var(--color-bg-neutral-hover);
   --tabs-item-bg-selected: var(--color-bg-neutral-selected);
   --tabs-item-fg-default: var(--color-fg-secondary);
   --tabs-item-fg-hover: var(--color-fg-primary);
@@ -368,6 +383,7 @@
   --order-form-radius: var(--radius-container);
   --order-form-item-gap: var(--space-stack-sm); /** Inside a group (v2) */
   --order-form-inline-gap: var(--space-inline-sm); /** Side-by-side items, e.g. quick-size stops, options row */
+  --order-form-width: var(--size-container-sm);
   --focus-ring-color: var(--color-border-focus);
   --focus-ring-width: var(--border-width-focus);
   --label-type-value-xs: var(--type-value-xs);
@@ -404,6 +420,10 @@
     --size-knob: var(--dimension-20);
     --size-grip-width: var(--dimension-1);
     --size-grip-height: var(--dimension-8);
+    --size-container-sm: var(--dimension-310); /** Narrow panel: the order form */
+    --size-container-md: var(--dimension-360); /** Side sheet or secondary column */
+    --size-container-lg: var(--dimension-720); /** Single-column page */
+    --size-container-xl: var(--dimension-1120); /** Wide page */
   }
 }
 
@@ -426,9 +446,12 @@
     --motion-duration-reveal: var(--duration-100); /** Kept short: opacity and colour still change, nothing travels */
     --motion-duration-sheet: var(--duration-0); /** Collapsed: no travel */
     --motion-duration-loop: var(--duration-800); /** One turn of a continuous indicator (spinner). Kept in Reduced mode: it is essential feedback. */
+    --motion-duration-notice: var(--duration-3000); /** How long a transient notice (toast) stays before it leaves on its own */
     --motion-easing-standard: var(--easing-ease-in-out);
     --motion-easing-enter: var(--easing-ease-in-out);
     --motion-easing-exit: var(--easing-ease-in-out);
     --motion-easing-emphasized: var(--easing-ease-in-out);
+    --motion-delay-validate: var(--duration-600); /** Pause before a soft validation error (below minimum) shows while typing */
+    --motion-scale-press: var(--scale-100); /** Collapsed: no movement on press */
   }
 }

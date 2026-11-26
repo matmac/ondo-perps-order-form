@@ -466,7 +466,31 @@
       }
     },
     "$type": "dimension",
-    "$description": "4px base grid. 9999 = pill. 11 is the original slider thumb width."
+    "$description": "4px base grid. 9999 = pill. 11 is the original slider thumb width. 310–1120 are container widths.",
+    "310": {
+      "$value": {
+        "value": 310,
+        "unit": "px"
+      }
+    },
+    "360": {
+      "$value": {
+        "value": 360,
+        "unit": "px"
+      }
+    },
+    "720": {
+      "$value": {
+        "value": 720,
+        "unit": "px"
+      }
+    },
+    "1120": {
+      "$value": {
+        "value": 1120,
+        "unit": "px"
+      }
+    }
   },
   "font": {
     "family": {
@@ -607,7 +631,19 @@
         "unit": "ms"
       }
     },
-    "$type": "duration"
+    "$type": "duration",
+    "600": {
+      "$value": {
+        "value": 600,
+        "unit": "ms"
+      }
+    },
+    "3000": {
+      "$value": {
+        "value": 3000,
+        "unit": "ms"
+      }
+    }
   },
   "easing": {
     "$type": "cubicBezier",
@@ -649,5 +685,15 @@
       "$value": 0.5
     },
     "$type": "number"
+  },
+  "scale": {
+    "$type": "number",
+    "$description": "Transform scale factors",
+    "98": {
+      "$value": 0.98
+    },
+    "100": {
+      "$value": 1
+    }
   }
 }

@@ -20,7 +20,7 @@ These guidelines are for engineers and AI coding agents who extend the order for
 
 ## 2. Ten rules
 
-1. **Use only component tokens inside components.** For example, `var(--button-primary-bg-success-hover)` belongs in a component, but `var(--color-green-200)` and `#66d5b7` do not. The build fails if a token skips a tier.
+1. **Use only component tokens inside components, and no raw values anywhere.** For example, `var(--button-primary-bg-success-hover)` belongs in a component, but `var(--color-green-200)`, `#66d5b7` or `310px` do not. `npm run tokens` fails if a token skips a tier, and `npm run lint` fails on an unknown token or a raw length, time, colour or curve in CSS. Only geometry stays raw: `0`, `%`, flex factors and stacking order. JS timers read duration tokens with `durationMs()` from `src/lib/cssToken.ts`.
 2. **Keep prop names identical to the Figma component properties.** If Figma says `variant`, `tone`, `status` or `hasHelper`, React uses the same names. Interactive `state` exists only in Figma. In code it is `:hover`, `:active` or `:focus-visible`.
 3. **Store one value per quantity.** Size is stored in the base asset (BTC, ETH, SOL). The USD amount, the slider position, margin, fee and liquidation are all derived from it and never stored.
 4. **Never animate numbers.** Values change in a single frame (see §8).
@@ -62,21 +62,22 @@ There are three kinds of building block:
 
 | Component | Key props (= Figma properties) |
 |---|---|
-| `Button` | `variant: primary \| secondary \| tertiary` (emphasis), `tone: neutral \| success \| danger` (meaning; success and danger on primary), `size: xs \| sm \| lg`, `disabled`, `loading`, `label`, `iconStart`, `iconEnd`. Icon-only (`xs`, `sm` ghost) needs `aria-label`. |
-| `SegmentedControl` | `tone: neutral \| success \| danger` (colours the selected option), `options[]`, `value`. Order side passes `tone={side === 'long' ? 'success' : 'danger'}`. |
-| `Tabs` | `items[]`, `value`, `size: sm`. Used for the order type. Items come from `market.orderTypes`. |
-| `Toggle Group` | `type="single"`, `value`, `onValueChange`, items `ToggleGroup.Item` (`label`, `selected`, `disabled`). Pill track (24) and pill items (20), smaller than Tabs. Used for the amount unit (base \| USD) inside an Input. Tokens `toggle-group/*`. |
+| `Button` | `variant: primary \| secondary \| tertiary` (emphasis), `tone: neutral \| success \| danger` (meaning; on primary only), `size: lg \| sm \| xs`, `disabled` (stays focusable via `aria-disabled`), `loading` (spinner in the start slot, label stays), `iconStart`, `iconEnd`, `href` (renders a link with the same look), label as `children`. Icon-only needs `aria-label`. |
+| `SegmentedControl` | `options` (exactly two), `value`, `onValueChange`, `tones` (indicator tone per option). Order side passes `tones={['success', 'danger']}`. `role="radiogroup"`. |
+| `Tabs` | `items[]` (`value`, `label`, `disabled`), `value`, `onValueChange`, `stretch`. Used for the order type; items come from `market.orderTypes`. The selected fill is a sliding indicator; hover changes the label only. |
+| `ToggleGroup` | `items[]` (`value`, `label`, `disabled`), `value`, `onValueChange`. Single choice, `role="radiogroup"`. Pill track and pill items (20), smaller than Tabs. Used for the amount unit (base \| USD) inside an Input. Tokens `toggle-group/*`. |
 | `Label` | `tone: subdued \| default \| muted \| success \| danger`, `size: xs \| sm`, `numeric`, `trigger` (dotted underline, opens a tooltip or modal), `children` |
-| `Input` | `type: text \| number`, `size: md \| lg`, `status: default \| error`, `disabled`, `readOnly`, `label`, `value`, `unit`, `helper`, `trailing` (slot), `precision` |
-| `Slider` | `tone: success \| danger`, `value` (size as % of buying power), `min`, `max`, `step`, `disabled`. Visual as shipped: a ramp of 2px ticks (neutral → tone colour at 50%) and an 11×16 grip thumb. |
-| `Switch` | `checked`, `disabled`, `aria-labelledby`. The control only; its label lives in the toggle row. Track 36×20 with a 16px thumb (40×24 and 20 on mobile); the whole toggle row is the click target. |
+| `Input` | `size: md \| lg`, `status: default \| error`, `label`, `hideLabel`, `value`, `onValueChange`, `unit`, `helper` (hint, or the error message with `status="error"`), `disabled`, `readOnly`, `groupDigits`, `trailing` (slot). Always `inputmode="decimal"`; precision is applied by the caller with `sanitizeDecimal`. |
+| `Slider` | `tone: success \| danger`, `value` (size as % of buying power), `onValueChange`, `min`, `max`, `step`, `disabled`, `aria-valuetext`. Visual as shipped: a ramp of 2px ticks (neutral → tone colour at 50%) and an 11×16 grip thumb, over a native range input. |
+| `Switch` | `checked`, `onCheckedChange`, `disabled`, `aria-labelledby`, `aria-describedby`. The control only; its label lives in the toggle row. Track 36×20 with a 16px thumb; the whole toggle row is the click target. |
 | `Divider` | `orientation: vertical \| horizontal` |
-| `Badge` | `tone: discovery \| neutral`, `label` |
-| `Alert` | `tone: info \| warning \| danger`, `message`, `action` |
-| `LabelValueRow` | `size: xs \| sm`, `tone`, `label` (a Label, may be a trigger), `leftIcon` (Icon or Badge, optional), `value` (null renders "–"), `secondary` (subdued Label; the Divider renders only with it), `action` (naked icon Button, XS). The value container is right aligned. |
-| `DetailsList` | `items: { label, value, tone }[]` rendered as `LabelValueRow size="xs"` |
-| `OrderTypeBar` | `market`, `orderType`, `layout: inline \| stacked`, `hasLeverage`. v1 and v2 use `layout="inline"`: Tabs left, one "Cross 20x" Button right, as in Ondo today. `layout="stacked"` with `hasLeverage` (margin mode and leverage as separate Buttons) is available but not used; see audit #18. |
-| `Icon` | `name`, `size: xs \| sm \| md`. Use the in-house set only. |
+| `OrderForm` | `market`, `account` (null = signed out), `marketOpen`, `initial`, `onPlaceOrder` (returns a promise; the form shows "Placing order…" until it settles), `onSecondLayer` (2nd-layer buttons call it). Status is derived, never passed in. |
+| `Badge` | `tone: discovery \| neutral`, `children` |
+| `Alert` | `tone: info \| warning \| danger`, `children` (message), `action` (`{ label, onClick }`) |
+| `LabelValueRow` | `size: xs \| sm`, `tone: default \| muted \| success \| danger`, `label`, `onLabelClick` (makes the label a trigger), `labelAddon` (Icon or Badge), `value` (null renders "–"), `secondary` (subdued text; the Divider renders only with it), `action` (`{ icon, label, onClick }`, naked icon Button XS). Renders `<dt>`/`<dd>`: place it in a `<dl>`. |
+| `DetailsList` | `children`: `LabelValueRow size="xs"` rows, one `<dl>`. Leave out the rows a state does not need. |
+| `OrderTypeBar` | `orderTypes[]`, `value`, `onValueChange`, `marginMode`, `leverage`, `onMarginClick`. Tabs left, one "Cross 20x" Button right, as in Ondo today. Figma also keeps `layout="stacked"` with `hasLeverage` (separate margin and leverage Buttons), not built in code because v2 does not use it; see audit #18. |
+| `Icon` | `name`, `size: xs \| sm \| md`, `label` (only when the icon carries meaning alone). Use the in-house set only. |
 
 **Patterns**
 
@@ -195,6 +196,9 @@ maxSize           = floor(buyingPower / markPrice, sizePrecision)
 | Hover, press (CTA scale 0.98), thumb grab | `motion/duration/feedback` | `motion/easing/standard` |
 | TP/SL and notice reveal (`grid-template-rows` 0fr → 1fr) | `motion/duration/reveal` | `motion/easing/enter` (exit: `state` + `exit`) |
 | Spinner | `motion/duration/loop` | linear |
+| CTA press | `motion/scale/press` (0.98, 1 in Reduced) over `motion/duration/feedback` | `motion/easing/standard` |
+| Soft validation (below minimum) waits | `motion/delay/validate` | none |
+| Toast stays | `motion/duration/notice` | none |
 
 These rules apply throughout:
 - **Animate only cheap properties.** Use transform, opacity and colour.

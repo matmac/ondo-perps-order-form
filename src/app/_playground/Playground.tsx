@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { OrderForm, Tabs, Label, Switch, ToggleGroup, Button, type OrderFormInitial } from "@/components";
-import { ThemeSwitch } from "@/components/dev/ThemeSwitch";
-import { account as demoAccount, exampleOrders, marketBySymbol, markets } from "@/lib/order";
+import { durationMs } from "@/lib/cssToken";
+import { account as demoAccount, exampleOrders, formatQuote, marketBySymbol, markets } from "@/lib/order";
 import s from "./playground.module.css";
 
-const TOAST_MS = 3000;
+/** Stand-in for the exchange's response time. Backend behaviour, not a design value. */
+const MOCK_LATENCY_MS = 1600;
 
 type AccountMode = "funded" | "signedOut" | "noFunds";
 
@@ -28,7 +28,7 @@ export function Playground() {
   // Out-of-scope clicks (2nd layer) show a short toast from the bottom, then leave on their own.
   useEffect(() => {
     if (!toast) return;
-    const hide = setTimeout(() => setToastOpen(false), TOAST_MS);
+    const hide = setTimeout(() => setToastOpen(false), durationMs("--motion-duration-notice"));
     return () => clearTimeout(hide);
   }, [toast]);
 
@@ -58,8 +58,9 @@ export function Playground() {
         account={account}
         marketOpen={marketOpen}
         initial={initial}
+        onPlaceOrder={() => new Promise((done) => setTimeout(done, MOCK_LATENCY_MS))}
         onSecondLayer={(what) => {
-          setToast({ id: Date.now(), text: `${what[0].toUpperCase()}${what.slice(1)} opens the 2nd layer, out of scope for this build.` });
+          setToast({ id: Date.now(), text: `${what}: 2nd layer, out of scope for this build.` });
           setToastOpen(true);
         }}
       />
@@ -89,7 +90,7 @@ export function Playground() {
           <ToggleGroup
             aria-label="Account"
             items={[
-              { value: "funded", label: "$2,500 USDC" },
+              { value: "funded", label: `${formatQuote(demoAccount.availableBalance)} ${demoAccount.balanceCurrency}` },
               { value: "noFunds", label: "No funds" },
               { value: "signedOut", label: "Signed out" },
             ]}
@@ -125,14 +126,13 @@ export function Playground() {
           <p className={`type-label-xs ${s.muted}`}>Submitting: place a valid order. Empty: clear the amount.</p>
         </div>
 
-        <div className={s.row}>
-          <Label>Theme</Label>
-          <ThemeSwitch />
-        </div>
-
-        <nav className={s.links}>
-          <Link href="/components" className="type-label-xs">Components</Link>
-          <Link href="/tokens" className="type-label-xs">Tokens</Link>
+        <nav className={s.links} aria-label="Design system">
+          <Button variant="secondary" href="/components" className={s.fill}>
+            Components
+          </Button>
+          <Button variant="secondary" href="/tokens" className={s.fill}>
+            Tokens
+          </Button>
         </nav>
       </aside>
 

@@ -6,15 +6,15 @@
   height: var(--slider-target);
 }
 
-/* Ticks are a mask over one gradient: start colour into the tone, then the tone to the end. */
+/* Ticks are a mask over one gradient: start colour into the tone by the middle, then the tone to the end. */
 .ramp {
   width: 100%;
   height: var(--slider-tick-height);
   opacity: var(--slider-ramp-opacity);
-  background: linear-gradient(to right, var(--slider-ramp-start), var(--_tone) 53%);
+  background: linear-gradient(to right, var(--slider-ramp-start), var(--_tone) 50%);
   mask: repeating-linear-gradient(
     to right,
-    #000 0 var(--slider-tick-width),
+    var(--slider-tick-fill) 0 var(--slider-tick-width),
     transparent var(--slider-tick-width) calc(var(--slider-tick-width) + var(--slider-tick-gap))
   );
 }

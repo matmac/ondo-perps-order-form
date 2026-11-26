@@ -9,8 +9,11 @@
   --motion-duration-reveal: var(--duration-100); /** Kept short: opacity and colour still change, nothing travels */
   --motion-duration-sheet: var(--duration-0); /** Collapsed: no travel */
   --motion-duration-loop: var(--duration-800); /** One turn of a continuous indicator (spinner). Kept in Reduced mode: it is essential feedback. */
+  --motion-duration-notice: var(--duration-3000); /** How long a transient notice (toast) stays before it leaves on its own */
   --motion-easing-standard: var(--easing-ease-in-out);
   --motion-easing-enter: var(--easing-ease-in-out);
   --motion-easing-exit: var(--easing-ease-in-out);
   --motion-easing-emphasized: var(--easing-ease-in-out);
+  --motion-delay-validate: var(--duration-600); /** Pause before a soft validation error (below minimum) shows while typing */
+  --motion-scale-press: var(--scale-100); /** Collapsed: no movement on press */
 }

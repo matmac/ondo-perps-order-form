@@ -67,6 +67,13 @@
       "type": {
         "$type": "typography",
         "$value": "{type.label.sm}"
+      },
+      "scale": {
+        "$type": "number",
+        "pressed": {
+          "$value": "{motion.scale.press}",
+          "$description": "Press feedback on the trade CTA"
+        }
       }
     },
     "secondary": {
@@ -163,9 +170,6 @@
     "item": {
       "bg": {
         "$type": "color",
-        "hover": {
-          "$value": "{color.bg.neutral.hover}"
-        },
         "selected": {
           "$value": "{color.bg.neutral.selected}"
         }
@@ -761,6 +765,10 @@
       "$type": "dimension",
       "$value": "{space.inline.sm}",
       "$description": "Side-by-side items, e.g. quick-size stops, options row"
+    },
+    "width": {
+      "$type": "dimension",
+      "$value": "{size.container.sm}"
     }
   },
   "focus-ring": {

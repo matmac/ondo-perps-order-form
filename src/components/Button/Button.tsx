@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, MouseEvent, ReactNode } from "react";
+import Link from "next/link";
 import { Icon, type IconName } from "../Icon/Icon";
 import s from "./Button.module.css";
 
@@ -14,6 +15,8 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   /** Stays focusable and announced (aria-disabled), so people can still reach it and read why. */
   disabled?: boolean;
   loading?: boolean;
+  /** Navigates instead of acting: renders a link with the same look. */
+  href?: string;
   children?: ReactNode;
 }
 
@@ -27,6 +30,7 @@ export function Button({
   iconEnd,
   disabled = false,
   loading = false,
+  href,
   type = "button",
   onClick,
   className,
@@ -39,26 +43,40 @@ export function Button({
     else onClick?.(e);
   };
   const iconOnly = !children;
+  const look = {
+    className: className ? `${s.button} ${className}` : s.button,
+    "data-variant": variant,
+    "data-tone": variant === "primary" ? tone : undefined,
+    "data-size": size,
+    "data-icon-only": iconOnly || undefined,
+  };
+  const content = (
+    <span className={s.content}>
+      {loading ? <span className={s.spinner} aria-hidden /> : iconStart && <Icon name={iconStart} size="sm" />}
+      {children}
+      {iconEnd && <Icon name={iconEnd} size="sm" />}
+    </span>
+  );
+
+  if (href) {
+    return (
+      <Link {...look} href={href} aria-label={rest["aria-label"]}>
+        {content}
+      </Link>
+    );
+  }
 
   return (
     <button
       {...rest}
       type={type}
-      className={className ? `${s.button} ${className}` : s.button}
-      data-variant={variant}
-      data-tone={variant === "primary" ? tone : undefined}
-      data-size={size}
-      data-icon-only={iconOnly || undefined}
+      {...look}
       data-loading={loading || undefined}
       aria-disabled={disabled || undefined}
       aria-busy={loading || undefined}
       onClick={handleClick}
     >
-      <span className={s.content}>
-        {loading ? <span className={s.spinner} aria-hidden /> : iconStart && <Icon name={iconStart} size="sm" />}
-        {children}
-        {iconEnd && <Icon name={iconEnd} size="sm" />}
-      </span>
+      {content}
     </button>
   );
 }

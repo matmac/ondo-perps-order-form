@@ -6,6 +6,7 @@
   flex: none;
   white-space: nowrap;
   user-select: none;
+  text-decoration: none;
   background: var(--_bg);
   color: var(--_fg);
   /* colour crossfades (side switch, disabled): state; press: feedback */
@@ -49,7 +50,7 @@
   --_bg-disabled: var(--button-primary-bg-danger-disabled);
 }
 .button[data-variant="primary"]:hover { background: var(--_bg-hover); }
-.button[data-variant="primary"]:active { background: var(--_bg-pressed); transform: scale(0.98); }
+.button[data-variant="primary"]:active { background: var(--_bg-pressed); transform: scale(var(--button-primary-scale-pressed)); }
 .button[data-variant="primary"][aria-disabled="true"]:active,
 .button[data-variant="primary"][data-loading]:active { transform: none; }
 .button[data-variant="primary"][aria-disabled="true"] {

@@ -111,7 +111,7 @@ const scopesFor = (c, path, kind) => {
   }
   if (p.startsWith('type/')) return { 'font-size': ['FONT_SIZE'], 'letter-spacing': ['LETTER_SPACING'], 'font-family': ['FONT_FAMILY'], 'font-weight': ['FONT_WEIGHT'] }[path.at(-1)] ?? [];
   if (p.startsWith('opacity/') || p.endsWith('/opacity')) return ['OPACITY'];
-  if (kind !== 'FLOAT' || p.startsWith('motion/')) return [];
+  if (kind !== 'FLOAT' || p.startsWith('motion/') || /(^|\/)scale\//.test(p)) return [];
   if (/radius/.test(p)) return ['CORNER_RADIUS'];
   if (/border-width|focus-ring\/width|divider\/width/.test(p)) return ['STROKE_FLOAT'];
   if (/^space\/|padding|gap/.test(p)) return ['GAP'];

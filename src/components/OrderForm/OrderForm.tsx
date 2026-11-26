@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { durationMs } from "@/lib/cssToken";
 import {
   amountError,
   deriveCta,
@@ -56,11 +57,8 @@ const SIDES = [
 const QUICK = [25, 50, 75, 100] as const;
 /** Default TP/SL distance when the trader turns TP/SL on (as in the Figma ready state). */
 const TPSL_DEFAULT_PCT = 5;
-/** Below minimum waits for blur or this pause, so the error does not flash while typing "0.00…". */
-const SOFT_ERROR_DELAY = 600;
 const PERCENT_PRECISION = 2;
 const QUOTE_PRECISION = 2;
-const SUBMIT_MS = 1600;
 
 export interface OrderFormInitial {
   side?: Side;
@@ -78,14 +76,16 @@ export interface OrderFormProps {
   marketOpen?: boolean;
   /** Starting values. Change the component key to apply new ones (the state switcher does). */
   initial?: OrderFormInitial;
-  /** Sign in, Deposit, leverage and the hint modals are the 2nd layer: buttons that do nothing here. */
+  /** Places the order. The form shows "Placing order…" until the promise settles, then clears the amount. */
+  onPlaceOrder?: (order: { side: Side; size: number; leverage: number; takeProfit: number | null; stopLoss: number | null }) => Promise<void>;
+  /** Sign in, Deposit, leverage, Limit/Stop price and the hint modals are the 2nd layer: buttons that do nothing here. */
   onSecondLayer?: (what: string) => void;
 }
 
 type Unit = "base" | "quote";
 
 /** Ondo Perps order form, v2. Everything shown is derived from one stored size (GUIDELINES §5–6). */
-export function OrderForm({ market, account, marketOpen = true, initial, onSecondLayer = () => {} }: OrderFormProps) {
+export function OrderForm({ market, account, marketOpen = true, initial, onPlaceOrder = async () => {}, onSecondLayer = () => {} }: OrderFormProps) {
   const [orderType, setOrderType] = useState<OrderType>("market");
   const [side, setSide] = useState<Side>(initial?.side ?? "long");
   const [leverage] = useState(() => clampLeverage(market, initial?.leverage ?? market.leverage.default));
@@ -123,19 +123,10 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
 
   useEffect(() => {
     if (!amount) return;
-    const t = setTimeout(() => setSoftErrors(true), SOFT_ERROR_DELAY);
+    // Below minimum waits for blur or this pause (motion.delay.validate), so it does not flash while typing "0.00…".
+    const t = setTimeout(() => setSoftErrors(true), durationMs("--motion-delay-validate"));
     return () => clearTimeout(t);
   }, [amount]);
-
-  useEffect(() => {
-    if (!submitting) return;
-    const t = setTimeout(() => {
-      setSubmitting(false);
-      setAmount("");
-      setSoftErrors(false);
-    }, SUBMIT_MS);
-    return () => clearTimeout(t);
-  }, [submitting]);
 
   const precision = unit === "base" ? market.sizePrecision : QUOTE_PRECISION;
   const setSize = (next: number) => {
@@ -186,6 +177,14 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
     if (status === "signedOut" || status === "noFunds" || status === "insufficientBalance") return onSecondLayer(cta.label);
     if (tpslBlocks) return;
     setSubmitting(true);
+    onPlaceOrder({ side, size: size!, leverage, takeProfit: tpsl ? parseDecimal(tp) : null, stopLoss: tpsl ? parseDecimal(sl) : null }).then(
+      () => {
+        setAmount("");
+        setSoftErrors(false);
+        setSubmitting(false);
+      },
+      () => setSubmitting(false),
+    );
   };
 
   return (
@@ -205,10 +204,13 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
             label: ORDER_TYPE_LABEL[t],
           }))}
           value={orderType}
-          onValueChange={(v) => setOrderType(v as OrderType)}
+          onValueChange={(v) => {
+            setOrderType(v as OrderType);
+            if (v !== "market") onSecondLayer(`${ORDER_TYPE_LABEL[v as OrderType]} price field`);
+          }}
           marginMode={market.leverage.marginMode === "cross" ? "Cross" : "Isolated"}
           leverage={leverage}
-          onMarginClick={() => onSecondLayer("leverage")}
+          onMarginClick={() => onSecondLayer("Leverage")}
         />
         <SegmentedControl
           aria-label="Side"
@@ -352,7 +354,7 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
       <div className={s.decision}>
         <div>
           <dl className={s.group}>
-            <LabelValueRow size="sm" label="Est. liquidation price" value={liq} onLabelClick={() => onSecondLayer("liquidation")} />
+            <LabelValueRow size="sm" label="Est. liquidation price" value={liq} onLabelClick={() => onSecondLayer("Liquidation price hint")} />
             <LabelValueRow size="sm" label="Margin required" value={filled ? formatQuote(marginRequired(market, size!, leverage)) : null} />
           </dl>
           <Reveal open={!marketOpen && account !== null} gap="var(--order-form-item-gap)">
@@ -360,7 +362,7 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
               tone="warning"
               action={{
                 label: "Learn more",
-                onClick: () => onSecondLayer("market hours"),
+                onClick: () => onSecondLayer("Market hours"),
               }}
             >
               The underlying market is closed. Liquidity and some safeguards are limited until it reopens.
@@ -396,13 +398,13 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
         />
         <LabelValueRow
           label="Slippage"
-          onLabelClick={() => onSecondLayer("slippage")}
+          onLabelClick={() => onSecondLayer("Slippage settings")}
           secondary="Est. 0%"
           value="Max 8%"
           action={{
             icon: "pencil-box",
             label: "Edit slippage",
-            onClick: () => onSecondLayer("slippage"),
+            onClick: () => onSecondLayer("Slippage settings"),
           }}
         />
       </DetailsList>

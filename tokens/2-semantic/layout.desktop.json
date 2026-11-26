@@ -103,6 +103,24 @@
       "height": {
         "$value": "{dimension.8}"
       }
+    },
+    "container": {
+      "sm": {
+        "$value": "{dimension.310}",
+        "$description": "Narrow panel: the order form"
+      },
+      "md": {
+        "$value": "{dimension.360}",
+        "$description": "Side sheet or secondary column"
+      },
+      "lg": {
+        "$value": "{dimension.720}",
+        "$description": "Single-column page"
+      },
+      "xl": {
+        "$value": "{dimension.1120}",
+        "$description": "Wide page"
+      }
     }
   },
   "border-width": {
