@@ -5,6 +5,12 @@ Next.js (App Router) + React + TypeScript.
 
 ## Run
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/matmac/ondo-perps-order-form?quickstart=1)
+
+Live preview: https://ondo-perps-order-form.vercel.app
+
+In a codespace the app installs and starts on its own, and the preview opens beside the code. Locally:
+
 ```bash
 npm install
 npm run dev

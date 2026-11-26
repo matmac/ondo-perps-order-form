@@ -1,0 +1,8 @@
+{
+  "name": "Ondo Perps order form",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
+  "postCreateCommand": "npm install",
+  "postAttachCommand": "npm run dev",
+  "forwardPorts": [3000],
+  "portsAttributes": { "3000": { "label": "Order form", "onAutoForward": "openPreview" } }
+}
