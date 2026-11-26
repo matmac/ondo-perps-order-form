@@ -10,21 +10,12 @@ What do the best perps venues do in the order form that a trader who places 400 
 
 - **Date:** 24 Nov 2026.
 - **Setup:** live trade pages, signed out, BTC market, desktop at 1600 × 1000 @2x.
-- **Capture:** Playwright, 9 s settle time. The script is `shoot.cjs`.
+- **Capture:** full-page screenshots after a 9 s settle, then the order panel cropped. The panels are on Figma › 05 · Research.
 - **Venues tried:** 13. Ondo Perps, Hyperliquid, dYdX, Lighter, Drift, Paradex, GMX, Aster, Binance, Bybit, OKX, Coinbase Advanced and Kraken Pro.
 - **Venues used for panel crops:** 7. Ondo Perps, Hyperliquid, dYdX, Lighter, Drift, Paradex and Bybit. The other six gave no usable order panel while signed out. Their full-page captures are kept.
 - **Mobile:** Mobbin references for Binance Futures, Crypto.com, Phantom and OKX. Mobbin needs a login, so these are cited, not embedded.
 - **Peer weighting:** Ondo Perps is a Hyperliquid-lineage layout. The closest peers are Hyperliquid, Paradex, Lighter and dYdX.
 - **Test for each pattern:** the brief's test. Could you defend it to a trader who uses this form 400 times a day, and does it still feel like Ondo Perps?
-
-## Files
-
-| What | Where |
-| --- | --- |
-| Full-page captures (13) | `competitors/*.png` |
-| Order panel crops (7) | `competitors/crops/*.jpg` |
-| Ondo Perps live, desktop and mobile | `live-desktop.jpg`, `live-mobile.jpg` |
-| Live app tokens and first-pass findings | `findings.md`, `app-root-tokens.txt` |
 
 ## Observations by venue
 
@@ -92,11 +83,3 @@ Grouped spacing (Setup, Size, Options, Review, Decision, Details) is v2 change 8
 - The captures are signed out. Signed-in states (positions, the real max size, the deposit flow) were not observed.
 - This is one market (BTC) on one day. The venues ship often, so recheck before quoting any of them.
 - No user testing. The verdicts are expert judgement against the brief's test, backed by how common each pattern is.
-
-## Reproduce
-
-```bash
-cd research && npm install && node shoot.cjs competitors
-```
-
-The script loads each venue's trade URL at 1600 × 1000 @2x, waits 9 s, presses Escape and takes a screenshot. The panel crops in `competitors/crops/` were cut from those captures with PIL.
