@@ -201,6 +201,7 @@ These rules apply throughout:
 - **Keep the touched control instant.** The control under the trader's hand responds immediately, and whatever mirrors it animates.
 - **No celebration.** Use no bounce, no shake and no confetti.
 - **Reduced motion comes from tokens.** The Reduced mode in the tokens handles it, so no extra code is needed.
+- **In code.** Reveals use `src/components/internal/Reveal` (content stays mounted and inert while closed). The Slider thumb animates when another control sets the size and follows the hand with no transition while the slider itself is dragged or stepped. The Tabs indicator is measured, so labels can differ in width.
 
 ## 9. Content
 

@@ -41,9 +41,14 @@ import { SegmentedControl } from "../SegmentedControl/SegmentedControl";
 import { Slider } from "../Slider/Slider";
 import { Switch } from "../Switch/Switch";
 import { ToggleGroup } from "../ToggleGroup/ToggleGroup";
+import { Reveal } from "../internal/Reveal";
 import s from "./OrderForm.module.css";
 
-const ORDER_TYPE_LABEL: Record<OrderType, string> = { market: "Market", limit: "Limit", stop: "Stop" };
+const ORDER_TYPE_LABEL: Record<OrderType, string> = {
+  market: "Market",
+  limit: "Limit",
+  stop: "Stop",
+};
 const SIDES = [
   { value: "long", label: "Long" },
   { value: "short", label: "Short" },
@@ -98,7 +103,14 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
   const typed = parseDecimal(amount);
   const size = typed === null ? null : unit === "base" ? typed : quoteToBase(market, typed);
   const balance = account?.availableBalance ?? 0;
-  const input: StatusInput = { account, market, size, leverage, marketOpen, submitting };
+  const input: StatusInput = {
+    account,
+    market,
+    size,
+    leverage,
+    marketOpen,
+    submitting,
+  };
   const status = deriveStatus(input);
   const cta = deriveCta(status, side, input);
   const error = amountError(status, input);
@@ -132,8 +144,7 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
     setSoftErrors(true);
   };
   const setFromPercent = (p: number) =>
-    !submitting &&
-    setSize(p >= 100 ? maxSize(market, balance, leverage) : sizeFromPercent(market, p, balance, leverage));
+    !submitting && setSize(p >= 100 ? maxSize(market, balance, leverage) : sizeFromPercent(market, p, balance, leverage));
 
   const switchUnit = (next: string) => {
     const u = next as Unit;
@@ -189,14 +200,23 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
     >
       <div className={s.group}>
         <OrderTypeBar
-          orderTypes={market.orderTypes.map((t) => ({ value: t, label: ORDER_TYPE_LABEL[t] }))}
+          orderTypes={market.orderTypes.map((t) => ({
+            value: t,
+            label: ORDER_TYPE_LABEL[t],
+          }))}
           value={orderType}
           onValueChange={(v) => setOrderType(v as OrderType)}
           marginMode={market.leverage.marginMode === "cross" ? "Cross" : "Isolated"}
           leverage={leverage}
           onMarginClick={() => onSecondLayer("leverage")}
         />
-        <SegmentedControl aria-label="Side" options={SIDES} tones={["success", "danger"]} value={side} onValueChange={(v) => setSide(v as Side)} />
+        <SegmentedControl
+          aria-label="Side"
+          options={SIDES}
+          tones={["success", "danger"]}
+          value={side}
+          onValueChange={(v) => setSide(v as Side)}
+        />
         <dl>
           <LabelValueRow label="Current position" value={null} />
         </dl>
@@ -269,81 +289,84 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
       </div>
 
       <div className={s.group}>
-        <ToggleRow
-          id={`${ids}-reduce`}
-          label="Reduce only"
-          hint="No open position"
-          checked={false}
-          onCheckedChange={() => {}}
-          disabled
-        />
-        <ToggleRow id={`${ids}-tpsl`} label="TP / SL" checked={tpsl} onCheckedChange={(on) => !submitting && toggleTpsl(on)} />
-        {tpsl && (
-          <>
-            <div className={s.inline}>
-              <Input
-                className={s.fill}
-                size="md"
-                label="TP price"
-                groupDigits
-                value={tp}
-                onValueChange={(v) => setTp(sanitizeDecimal(v, market.pricePrecision))}
-                status={tpslErr.takeProfit ? "error" : "default"}
-                helper={tpslErr.takeProfit}
-                readOnly={submitting}
-              />
-              <Input
-                className={s.fill}
-                size="md"
-                label="Gain"
-                unit="%"
-                value={pctOf(tp)}
-                onValueChange={(v) => {
-                  const p = parseDecimal(sanitizeDecimal(v, PERCENT_PRECISION));
-                  setTp(p === null ? "" : priceAt(p, side === "long"));
-                }}
-                readOnly={submitting}
-              />
+        <ToggleRow id={`${ids}-reduce`} label="Reduce only" hint="No open position" checked={false} onCheckedChange={() => {}} disabled />
+        <div>
+          <ToggleRow id={`${ids}-tpsl`} label="TP / SL" checked={tpsl} onCheckedChange={(on) => !submitting && toggleTpsl(on)} />
+          <Reveal open={tpsl} gap="var(--order-form-item-gap)">
+            <div className={s.group}>
+              <div className={s.inline}>
+                <Input
+                  className={s.fill}
+                  size="md"
+                  label="TP price"
+                  groupDigits
+                  value={tp}
+                  onValueChange={(v) => setTp(sanitizeDecimal(v, market.pricePrecision))}
+                  status={tpslErr.takeProfit ? "error" : "default"}
+                  helper={tpslErr.takeProfit}
+                  readOnly={submitting}
+                />
+                <Input
+                  className={s.fill}
+                  size="md"
+                  label="Gain"
+                  unit="%"
+                  value={pctOf(tp)}
+                  onValueChange={(v) => {
+                    const p = parseDecimal(sanitizeDecimal(v, PERCENT_PRECISION));
+                    setTp(p === null ? "" : priceAt(p, side === "long"));
+                  }}
+                  readOnly={submitting}
+                />
+              </div>
+              <div className={s.inline}>
+                <Input
+                  className={s.fill}
+                  size="md"
+                  label="SL price"
+                  groupDigits
+                  value={sl}
+                  onValueChange={(v) => setSl(sanitizeDecimal(v, market.pricePrecision))}
+                  status={tpslErr.stopLoss ? "error" : "default"}
+                  helper={tpslErr.stopLoss}
+                  readOnly={submitting}
+                />
+                <Input
+                  className={s.fill}
+                  size="md"
+                  label="Loss"
+                  unit="%"
+                  value={pctOf(sl)}
+                  onValueChange={(v) => {
+                    const p = parseDecimal(sanitizeDecimal(v, PERCENT_PRECISION));
+                    setSl(p === null ? "" : priceAt(p, side === "short"));
+                  }}
+                  readOnly={submitting}
+                />
+              </div>
             </div>
-            <div className={s.inline}>
-              <Input
-                className={s.fill}
-                size="md"
-                label="SL price"
-                groupDigits
-                value={sl}
-                onValueChange={(v) => setSl(sanitizeDecimal(v, market.pricePrecision))}
-                status={tpslErr.stopLoss ? "error" : "default"}
-                helper={tpslErr.stopLoss}
-                readOnly={submitting}
-              />
-              <Input
-                className={s.fill}
-                size="md"
-                label="Loss"
-                unit="%"
-                value={pctOf(sl)}
-                onValueChange={(v) => {
-                  const p = parseDecimal(sanitizeDecimal(v, PERCENT_PRECISION));
-                  setSl(p === null ? "" : priceAt(p, side === "short"));
-                }}
-                readOnly={submitting}
-              />
-            </div>
-          </>
-        )}
+          </Reveal>
+        </div>
       </div>
 
       <div className={s.decision}>
-        <dl className={s.group}>
-          <LabelValueRow size="sm" label="Est. liquidation price" value={liq} onLabelClick={() => onSecondLayer("liquidation")} />
-          <LabelValueRow size="sm" label="Margin required" value={filled ? formatQuote(marginRequired(market, size!, leverage)) : null} />
-        </dl>
-        {!marketOpen && account !== null && (
-          <Alert tone="warning" action={{ label: "Learn more", onClick: () => onSecondLayer("market hours") }}>
-            The underlying market is closed. Liquidity and some safeguards are limited until it reopens.
-          </Alert>
-        )}
+        <div>
+          <dl className={s.group}>
+            <LabelValueRow size="sm" label="Est. liquidation price" value={liq} onLabelClick={() => onSecondLayer("liquidation")} />
+            <LabelValueRow size="sm" label="Margin required" value={filled ? formatQuote(marginRequired(market, size!, leverage)) : null} />
+          </dl>
+          <Reveal open={!marketOpen && account !== null} gap="var(--order-form-item-gap)">
+            <Alert
+              tone="warning"
+              action={{
+                label: "Learn more",
+                onClick: () => onSecondLayer("market hours"),
+              }}
+            >
+              The underlying market is closed. Liquidity and some safeguards are limited until it reopens.
+            </Alert>
+          </Reveal>
+        </div>
         <Button
           type="submit"
           tone={cta.tone}
@@ -376,7 +399,11 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
           onLabelClick={() => onSecondLayer("slippage")}
           secondary="Est. 0%"
           value="Max 8%"
-          action={{ icon: "pencil-box", label: "Edit slippage", onClick: () => onSecondLayer("slippage") }}
+          action={{
+            icon: "pencil-box",
+            label: "Edit slippage",
+            onClick: () => onSecondLayer("slippage"),
+          }}
         />
       </DetailsList>
     </form>
@@ -384,8 +411,7 @@ export function OrderForm({ market, account, marketOpen = true, initial, onSecon
 }
 
 /** Whole numbers above 1%, one decimal below, so a tiny size never reads as 0%. */
-const formatPercentField = (p: number) =>
-  p >= 1 ? Math.round(p).toLocaleString("en-US") : String(Math.max(0.1, Math.round(p * 10) / 10));
+const formatPercentField = (p: number) => (p >= 1 ? Math.round(p).toLocaleString("en-US") : String(Math.max(0.1, Math.round(p * 10) / 10)));
 
 /** Toggle row pattern: Label (trigger) + Switch. The whole row is the target. */
 function ToggleRow({

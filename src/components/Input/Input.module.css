@@ -65,6 +65,7 @@
 .field[data-size="md"] .unit { font: var(--input-type-value); letter-spacing: var(--type-value-sm-letter-spacing); }
 
 .message {
+  transition: color var(--motion-duration-state) var(--motion-easing-standard);
   font: var(--type-label-xs);
   letter-spacing: var(--type-label-xs-letter-spacing);
   color: var(--input-fg-helper);

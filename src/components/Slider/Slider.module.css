@@ -32,7 +32,9 @@
   background: var(--slider-thumb-bg-default);
   box-shadow: var(--slider-thumb-shadow);
   pointer-events: none;
+  transition: left var(--motion-duration-move) var(--motion-easing-emphasized);
 }
+.root[data-active] .thumb { transition: none; }
 .grip {
   width: var(--slider-thumb-grip-width);
   height: var(--slider-thumb-grip-height);

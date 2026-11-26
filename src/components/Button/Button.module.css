@@ -8,9 +8,11 @@
   user-select: none;
   background: var(--_bg);
   color: var(--_fg);
-  transition-property: background-color, color;
-  transition-duration: var(--motion-duration-state);
-  transition-timing-function: var(--motion-easing-standard);
+  /* colour crossfades (side switch, disabled): state; press: feedback */
+  transition:
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
 }
 
 .content {
@@ -47,7 +49,9 @@
   --_bg-disabled: var(--button-primary-bg-danger-disabled);
 }
 .button[data-variant="primary"]:hover { background: var(--_bg-hover); }
-.button[data-variant="primary"]:active { background: var(--_bg-pressed); }
+.button[data-variant="primary"]:active { background: var(--_bg-pressed); transform: scale(0.98); }
+.button[data-variant="primary"][aria-disabled="true"]:active,
+.button[data-variant="primary"][data-loading]:active { transform: none; }
 .button[data-variant="primary"][aria-disabled="true"] {
   background: var(--_bg-disabled);
   color: var(--button-primary-fg-disabled);
@@ -104,6 +108,3 @@
   animation: spin var(--motion-duration-loop) linear infinite;
 }
 @keyframes spin { to { transform: rotate(1turn); } }
-@media (prefers-reduced-motion: reduce) {
-  .spinner { animation-duration: calc(var(--motion-duration-loop) * 3); }
-}

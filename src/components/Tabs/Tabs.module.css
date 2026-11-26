@@ -1,4 +1,6 @@
 .track {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   gap: var(--tabs-track-padding);
   padding: var(--tabs-track-padding);
@@ -21,6 +23,20 @@
   transition-duration: var(--motion-duration-state);
   transition-timing-function: var(--motion-easing-standard);
 }
+.indicator {
+  position: absolute;
+  z-index: -1;
+  inset-block: var(--tabs-track-padding);
+  left: 0;
+  width: var(--_w, 0);
+  border-radius: var(--tabs-item-radius);
+  background: var(--tabs-item-bg-selected);
+  transform: translateX(var(--_x, 0));
+  transition-property: transform, width;
+  transition-duration: var(--motion-duration-move);
+  transition-timing-function: var(--motion-easing-emphasized);
+}
+
 .item:hover { background: var(--tabs-item-bg-hover); color: var(--tabs-item-fg-hover); }
-.item[aria-selected="true"] { background: var(--tabs-item-bg-selected); color: var(--tabs-item-fg-selected); }
+.item[aria-selected="true"] { background: none; color: var(--tabs-item-fg-selected); }
 .item[aria-disabled="true"] { background: none; color: var(--tabs-item-fg-disabled); cursor: not-allowed; }

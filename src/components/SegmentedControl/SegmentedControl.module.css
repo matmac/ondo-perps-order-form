@@ -17,9 +17,10 @@
   width: calc(50% - var(--segmented-control-track-padding));
   border-radius: var(--segmented-control-indicator-radius);
   background: var(--_indicator);
-  transition-property: transform, background-color;
-  transition-duration: var(--motion-duration-move);
-  transition-timing-function: var(--motion-easing-standard);
+  /* travel: move + emphasized; colour crossfade: state + standard */
+  transition:
+    transform var(--motion-duration-move) var(--motion-easing-emphasized),
+    background-color var(--motion-duration-state) var(--motion-easing-standard);
 }
 .track[data-selected="second"] .indicator { transform: translateX(100%); }
 .track[data-tone="neutral"] { --_indicator: var(--segmented-control-indicator-bg-neutral); --_selected: var(--segmented-control-label-fg-selected-neutral); }
