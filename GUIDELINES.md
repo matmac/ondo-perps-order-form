@@ -8,6 +8,7 @@ These guidelines are for engineers and AI coding agents who extend the order for
 |---|---|
 | Tokens (source of truth) | `tokens/*.json` (DTCG 2025.10). Build with `npm run tokens`, which outputs `tokens/dist/tokens.css` |
 | Token rules | `tokens/README.md` |
+| Order logic: market data, formulas, formatting, input rules, status model | `src/lib/order/` · tests with `npm test` |
 | Audit of the original (issues #1–#21; #17–#21 from research, #2 resolved) | Figma › 01 · Audit |
 | Token sheet | Figma › 02 · Tokens |
 | Motion spec and prototype | Figma › 03 · Motion |
@@ -127,7 +128,7 @@ Evaluate the statuses in this order. The first match wins.
 | signedOut | default | primary · "Sign in" | none |
 | noFunds | default | primary · "Deposit USDC" | none |
 | empty | placeholder | primary + tone · disabled · "Enter an amount" | none |
-| ready | helper "≈ $3,421.03" | primary + tone · "Long 0.0500 BTC" | none |
+| ready | helper "$2,500.00 available · Max 0.7307 BTC" | primary + tone · "Long 0.0500 BTC" | none |
 | belowMinimum | error "Minimum 0.0010 BTC" | primary + tone · disabled · same text | none |
 | aboveMaximum | error "Maximum 500.000 ETH" | primary + tone · disabled · same text | none |
 | insufficientBalance | error "Needs $6,842.05 margin · $2,500.00 available" | primary · "Deposit USDC" | none |
@@ -229,7 +230,7 @@ These rules apply throughout:
 
 - [ ] No hex values or tier-1/tier-2 tokens inside components, and `npm run tokens` passes.
 - [ ] Props match the Figma properties one to one.
-- [ ] Every `exampleOrders` fixture reaches its expected status.
+- [ ] Every `exampleOrders` fixture reaches its expected status (`npm test`).
 - [ ] Keyboard-only run-through passes, and screen-reader labels are checked.
 - [ ] Both Layout modes and both Motion modes are checked.
 - [ ] Figma › 03 and 04 are updated in the same change.

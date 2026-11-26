@@ -10,7 +10,7 @@ What do the best perps venues do in the order form that a trader who places 400 
 
 - **Date:** 24 Nov 2026.
 - **Setup:** live trade pages, signed out, BTC market, desktop at 1600 × 1000 @2x.
-- **Capture:** Playwright, 9 s settle time. The script is `shoot.js`.
+- **Capture:** Playwright, 9 s settle time. The script is `shoot.cjs`.
 - **Venues tried:** 13. Ondo Perps, Hyperliquid, dYdX, Lighter, Drift, Paradex, GMX, Aster, Binance, Bybit, OKX, Coinbase Advanced and Kraken Pro.
 - **Venues used for panel crops:** 7. Ondo Perps, Hyperliquid, dYdX, Lighter, Drift, Paradex and Bybit. The other six gave no usable order panel while signed out. Their full-page captures are kept.
 - **Mobile:** Mobbin references for Binance Futures, Crypto.com, Phantom and OKX. Mobbin needs a login, so these are cited, not embedded.
@@ -96,7 +96,7 @@ Grouped spacing (Setup, Size, Options, Review, Decision, Details) is v2 change 8
 ## Reproduce
 
 ```bash
-cd research && npm install && node shoot.js competitors
+cd research && npm install && node shoot.cjs competitors
 ```
 
 The script loads each venue's trade URL at 1600 × 1000 @2x, waits 9 s, presses Escape and takes a screenshot. The panel crops in `competitors/crops/` were cut from those captures with PIL.
