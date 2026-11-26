@@ -21,6 +21,7 @@ export function Playground() {
   const [marketOpen, setMarketOpen] = useState(true);
   const [initial, setInitial] = useState<OrderFormInitial | undefined>();
   const [run, setRun] = useState(0);
+  const [sheetOpen, setSheetOpen] = useState(true);
   const [toast, setToast] = useState<{ id: number; text: string } | null>(null);
   const [toastOpen, setToastOpen] = useState(false);
 
@@ -39,7 +40,18 @@ export function Playground() {
   };
 
   return (
-    <div className={s.layout}>
+    <div className={s.layout} data-sheet={sheetOpen ? "open" : "closed"}>
+      <Button
+        variant="secondary"
+        iconStart="adjust"
+        className={s.sheetToggle}
+        aria-expanded={sheetOpen}
+        aria-controls="prototype-controls"
+        onClick={() => setSheetOpen((o) => !o)}
+      >
+        {sheetOpen ? "Hide controls" : "Show controls"}
+      </Button>
+
       <OrderForm
         key={`${symbol}-${run}`}
         market={market}
@@ -52,7 +64,7 @@ export function Playground() {
         }}
       />
 
-      <aside className={s.panel} aria-label="Prototype controls">
+      <aside id="prototype-controls" className={s.panel} aria-label="Prototype controls" inert={!sheetOpen}>
         <header className={s.head}>
           <Label size="sm" tone="default">Prototype controls</Label>
           <p className={`type-label-xs ${s.muted}`}>Not part of the form. They stand in for the asset picker, the account and the backend.</p>

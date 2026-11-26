@@ -8,6 +8,16 @@
   min-height: 100dvh;
   padding: var(--space-stack-lg);
   padding-right: calc(var(--_sheet) + var(--space-stack-lg));
+  transition: padding-right var(--motion-duration-sheet) var(--motion-easing-emphasized);
+}
+.layout[data-sheet="closed"] { padding-right: var(--space-stack-lg); }
+
+/* Always on top, top right: opens and closes the sheet. */
+.sheetToggle {
+  position: fixed;
+  z-index: 2;
+  top: var(--space-stack-lg);
+  right: var(--space-stack-lg);
 }
 
 .panel {
@@ -20,16 +30,30 @@
   grid-template-columns: minmax(0, 1fr);
   align-content: start;
   gap: var(--space-stack-lg);
-  padding: var(--space-stack-lg);
-  background: var(--color-bg-surface-default);
+  /* leaves room for the toggle above the first row */
+  padding: calc(var(--space-stack-lg) * 2 + var(--button-secondary-height)) var(--space-stack-lg) var(--space-stack-lg);
+  /* Prototype chrome, not a component: white at 5% over the page. */
+  background: var(--color-alpha-white-5);
   box-shadow: inset var(--border-width-default) 0 0 0 var(--color-border-subtle);
+  transition:
+    transform var(--motion-duration-sheet) var(--motion-easing-emphasized),
+    visibility 0s linear var(--motion-duration-sheet);
 }
+.layout[data-sheet="open"] .panel {
+  transition:
+    transform var(--motion-duration-sheet) var(--motion-easing-emphasized),
+    visibility 0s;
+}
+.layout[data-sheet="closed"] .panel { transform: translateX(100%); visibility: hidden; }
 
 /* Narrow screens: no room for a side sheet, so the controls follow the form. */
 @media (max-width: 767px) {
   .layout { flex-direction: column; padding-right: var(--space-stack-lg); gap: var(--space-stack-lg); }
+  .sheetToggle { position: static; align-self: flex-end; }
+  .layout[data-sheet="closed"] .panel { display: none; }
   .panel {
     position: static;
+    padding: var(--space-stack-lg);
     width: 100%;
     max-width: 360px;
     overflow: visible;
@@ -67,6 +91,7 @@
     transform var(--motion-duration-state) var(--motion-easing-exit),
     opacity var(--motion-duration-state) var(--motion-easing-exit);
 }
+.layout[data-sheet="closed"] .toast { left: 50%; }
 .toast[data-open] {
   opacity: 1;
   transform: translate(-50%, 0);
