@@ -66,6 +66,7 @@
 .row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-inline-sm); }
 .orders { display: grid; gap: var(--space-stack-xs); width: 100%; }
 .order { justify-content: flex-start; }
+.wide { width: 100%; }
 .muted { color: var(--color-fg-tertiary); }
 .links {
   display: flex;

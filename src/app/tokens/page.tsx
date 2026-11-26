@@ -23,7 +23,9 @@ export default function TokensPage() {
           <h1 className="type-label-md">Tokens</h1>
           <p className={`type-label-xs ${s.meta}`}>Semantic tier, read from tokens/dist/tokens.json. Resize under 768px for Mobile.</p>
         </div>
-        <ThemeSwitch />
+        <div className={s.theme}>
+          <ThemeSwitch />
+        </div>
       </header>
 
       <section className={s.section}>

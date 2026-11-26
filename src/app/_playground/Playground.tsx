@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { OrderForm, Tabs, Label, Switch, ToggleGroup, Button, type OrderFormInitial } from "@/components";
 import { durationMs } from "@/lib/cssToken";
+import { ThemeSwitch } from "@/components/dev/ThemeSwitch";
 import { account as demoAccount, exampleOrders, formatQuote, marketBySymbol, markets } from "@/lib/order";
 import s from "./playground.module.css";
 
@@ -70,6 +71,14 @@ export function Playground() {
           <Label size="sm" tone="default">Prototype controls</Label>
           <p className={`type-label-xs ${s.muted}`}>Not part of the form. They stand in for the asset picker, the account and the backend.</p>
         </header>
+
+        <div className={s.field}>
+          <Label>Theme</Label>
+          <div className={s.wide}>
+            <ThemeSwitch />
+          </div>
+          <p className={`type-label-xs ${s.muted}`}>Modern is a cosmetic exploration: radius and number font only.</p>
+        </div>
 
         <div className={s.field}>
           <Label>Market</Label>

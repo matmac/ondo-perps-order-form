@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ToggleGroup } from "../ToggleGroup/ToggleGroup";
+import { SegmentedControl } from "../SegmentedControl/SegmentedControl";
 
 type Theme = "classic" | "modern";
 
 /**
- * Switches the Semantic · Theme mode on the token page only. Modern is a cosmetic exploration kept in the
- * tokens, not a product theme switcher (the brief leaves that out). The attribute lives on <html>
+ * Switches the Semantic · Theme mode (prototype controls and the token page). Modern is a cosmetic exploration
+ * kept in the tokens, not a product theme switcher (the brief leaves that out). The attribute lives on <html>
  * because the component tokens are declared on :root.
  */
 export function ThemeSwitch() {
@@ -21,11 +21,11 @@ export function ThemeSwitch() {
   }, [theme]);
 
   return (
-    <ToggleGroup
-      aria-label="Theme exploration"
-      items={[
+    <SegmentedControl
+      aria-label="Theme"
+      options={[
         { value: "classic", label: "Classic" },
-        { value: "modern", label: "Modern (exploration)" },
+        { value: "modern", label: "Modern" },
       ]}
       value={theme}
       onValueChange={(v) => setTheme(v as Theme)}
