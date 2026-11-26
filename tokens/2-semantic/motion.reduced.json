@@ -27,6 +27,10 @@
       "loop": {
         "$value": "{duration.800}",
         "$description": "One turn of a continuous indicator (spinner). Kept in Reduced mode: it is essential feedback."
+      },
+      "notice": {
+        "$value": "{duration.3000}",
+        "$description": "How long a transient notice (toast) stays before it leaves on its own"
       }
     },
     "easing": {
@@ -42,6 +46,20 @@
       },
       "emphasized": {
         "$value": "{easing.ease-in-out}"
+      }
+    },
+    "delay": {
+      "$type": "duration",
+      "validate": {
+        "$value": "{duration.600}",
+        "$description": "Pause before a soft validation error (below minimum) shows while typing"
+      }
+    },
+    "scale": {
+      "$type": "number",
+      "press": {
+        "$value": "{scale.100}",
+        "$description": "Collapsed: no movement on press"
       }
     }
   }

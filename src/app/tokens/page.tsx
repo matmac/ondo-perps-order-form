@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import { listTokens } from "@/lib/tokens";
 import { ThemeSwitch } from "@/components/dev/ThemeSwitch";
@@ -22,7 +23,9 @@ export default function TokensPage() {
           <h1 className="type-label-md">Tokens</h1>
           <p className={`type-label-xs ${s.meta}`}>Semantic tier, read from tokens/dist/tokens.json. Resize under 768px for Mobile.</p>
         </div>
-        <ThemeSwitch />
+        <div className={s.theme}>
+          <ThemeSwitch />
+        </div>
       </header>
 
       <section className={s.section}>
@@ -41,12 +44,14 @@ export default function TokensPage() {
 
       <section className={s.section}>
         <h2 className={`type-label-sm ${s.sectionTitle}`}>Typography</h2>
-        {TYPE_STYLES.map((name) => (
-          <div key={name} className={s.typeRow}>
-            <span className={`type-label-xs ${s.typeName}`}>{name.replace("-", "/")}</span>
-            <span className={`type-${name}`}>{name.startsWith("value") ? "$68,420.5 · 0.0500 BTC" : "Est. liquidation price"}</span>
-          </div>
-        ))}
+        <div className={s.typeList}>
+          {TYPE_STYLES.map((name) => (
+            <Fragment key={name}>
+              <span className={`type-label-xs ${s.typeName}`}>{name.replace("-", "/")}</span>
+              <span className={`type-${name}`}>{name.startsWith("value") ? "$68,420.5 · 0.0500 BTC" : "Est. liquidation price"}</span>
+            </Fragment>
+          ))}
+        </div>
       </section>
 
       <section className={s.section}>

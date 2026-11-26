@@ -1,0 +1,115 @@
+.layout {
+  display: flex;
+  flex-wrap: wrap;
+  /* The form is centred both ways in the space left of the controls sheet. */
+  --_sheet: var(--size-container-md);
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: var(--space-stack-lg);
+  padding-right: calc(var(--_sheet) + var(--space-stack-lg));
+  transition: padding-right var(--motion-duration-sheet) var(--motion-easing-emphasized);
+}
+.layout[data-sheet="closed"] { padding-right: var(--space-stack-lg); }
+
+/* Always on top, top right: opens and closes the sheet. */
+.sheetToggle {
+  position: fixed;
+  z-index: 1;
+  top: var(--space-stack-lg);
+  right: var(--space-stack-lg);
+}
+
+.panel {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: var(--_sheet);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-stack-lg);
+  /* leaves room for the toggle above the first row */
+  padding: calc(var(--space-stack-lg) * 2 + var(--button-secondary-height)) var(--space-stack-lg) var(--space-stack-lg);
+  /* Prototype chrome, not a component: white at 5% over the page. */
+  background: var(--color-alpha-white-5);
+  box-shadow: inset var(--border-width-default) 0 0 0 var(--color-border-subtle);
+  transition:
+    transform var(--motion-duration-sheet) var(--motion-easing-emphasized),
+    visibility 0s linear var(--motion-duration-sheet);
+}
+.layout[data-sheet="open"] .panel {
+  transition:
+    transform var(--motion-duration-sheet) var(--motion-easing-emphasized),
+    visibility 0s;
+}
+.layout[data-sheet="closed"] .panel { transform: translateX(100%); visibility: hidden; }
+
+/* Narrow screens: the form fills the screen edge to edge, the controls follow it. */
+@media (max-width: 767px) {
+  .layout {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-stack-lg);
+    padding: 0;
+  }
+  .sheetToggle { position: relative; align-self: flex-end; margin: var(--space-stack-lg) var(--space-stack-lg) 0; }
+  .layout[data-sheet="closed"] .panel { display: none; }
+  .panel {
+    position: static;
+    width: auto;
+    margin: 0 var(--space-stack-lg) var(--space-stack-lg);
+    padding: var(--space-stack-lg);
+    overflow: visible;
+    border-radius: var(--radius-container);
+    box-shadow: inset 0 0 0 var(--border-width-default) var(--color-border-subtle);
+  }
+}
+
+
+.head,
+.field { display: grid; gap: var(--space-stack-xs); justify-items: start; min-width: 0; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-inline-sm); }
+.orders { display: grid; gap: var(--space-stack-xs); width: 100%; }
+.order { justify-content: flex-start; }
+.wide { width: 100%; }
+.muted { color: var(--color-fg-secondary); } /* tertiary falls under 4.5:1 on the translucent sheet */
+.links {
+  display: flex;
+  gap: var(--space-inset-md);
+  margin-top: auto;
+}
+.fill { flex: 1 1 0; min-width: 0; }
+
+/* Prototype toast: enters from the bottom (reveal + enter), leaves with state + exit. */
+.toast {
+  position: fixed;
+  left: calc((100% - var(--_sheet)) / 2);
+  bottom: var(--space-stack-lg);
+  max-width: calc(100% - var(--space-stack-lg) * 2);
+  padding: var(--space-inset-sm) var(--space-inset-md);
+  border-radius: var(--radius-control);
+  background: var(--color-bg-surface-inverse);
+  color: var(--color-fg-inverse);
+  font: var(--type-label-xs);
+  letter-spacing: var(--type-label-xs-letter-spacing);
+  box-shadow: var(--elevation-glow);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, calc(100% + var(--space-stack-lg)));
+  transition:
+    transform var(--motion-duration-state) var(--motion-easing-exit),
+    opacity var(--motion-duration-state) var(--motion-easing-exit);
+}
+.layout[data-sheet="closed"] .toast { left: 50%; }
+.toast[data-open] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  transition:
+    transform var(--motion-duration-reveal) var(--motion-easing-enter),
+    opacity var(--motion-duration-reveal) var(--motion-easing-enter);
+}
+
+@media (max-width: 767px) {
+  .toast { left: 50%; }
+}

@@ -8,6 +8,7 @@ Next.js (App Router) + React + TypeScript.
 ```bash
 npm install
 npm run dev
+npm test     # order logic: the brief's fixtures, formulas, formatting
 ```
 
 Open http://localhost:3000.
@@ -24,6 +25,8 @@ Open http://localhost:3000.
 | --- | --- |
 | Design tokens (source, DTCG 2025.10) | `tokens/` · build with `npm run tokens` |
 | Tokens used by the app | `src/styles/tokens.css` (generated) |
+| Components | `src/components/` · showcase at `/components` |
+| Order logic | `src/lib/order/` |
 | Guideline for extending the form | `GUIDELINES.md` |
 | Competitive research | `docs/research/competitive.md` |
 

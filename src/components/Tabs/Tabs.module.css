@@ -1,4 +1,6 @@
 .track {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   gap: var(--tabs-track-padding);
   padding: var(--tabs-track-padding);
@@ -9,6 +11,7 @@
 .track[data-stretch] .item { flex: 1; }
 
 .item {
+  composes: target from "../internal/target.module.css";
   min-width: calc(var(--tabs-item-height) * 2 + var(--space-inline-xs));
   height: var(--tabs-item-height);
   padding-inline: var(--tabs-item-padding-inline);
@@ -21,6 +24,21 @@
   transition-duration: var(--motion-duration-state);
   transition-timing-function: var(--motion-easing-standard);
 }
-.item:hover { background: var(--tabs-item-bg-hover); color: var(--tabs-item-fg-hover); }
-.item[aria-selected="true"] { background: var(--tabs-item-bg-selected); color: var(--tabs-item-fg-selected); }
+.indicator {
+  position: absolute;
+  z-index: -1;
+  inset-block: var(--tabs-track-padding);
+  left: 0;
+  width: var(--_w, 0);
+  border-radius: var(--tabs-item-radius);
+  background: var(--tabs-item-bg-selected);
+  transform: translateX(var(--_x, 0));
+  transition-property: transform, width;
+  transition-duration: var(--motion-duration-move);
+  transition-timing-function: var(--motion-easing-emphasized);
+}
+
+/* Hover changes the label only: a hover fill would sit where the indicator is about to land and read as a jump. */
+.item:hover { color: var(--tabs-item-fg-hover); }
+.item[aria-selected="true"] { color: var(--tabs-item-fg-selected); }
 .item[aria-disabled="true"] { background: none; color: var(--tabs-item-fg-disabled); cursor: not-allowed; }

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ThemeSwitch } from "@/components/dev/ThemeSwitch";
 import { Showcase } from "./Showcase";
 import s from "./components.module.css";
 
@@ -14,7 +13,6 @@ export default function ComponentsPage() {
           <h1 className="type-label-md">Primitives</h1>
           <p className={`type-label-xs ${s.meta}`}>Tab through the page to check focus. Resize under 768px for Mobile.</p>
         </div>
-        <ThemeSwitch />
       </header>
       <Showcase />
     </main>

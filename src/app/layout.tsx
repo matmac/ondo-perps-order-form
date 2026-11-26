@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   title: "Ondo Perps · Order form",
   description: "Ondo Perps order form rebuilt from the design system: tokens, components and every state.",
 };
+
+// viewport-fit=cover lets the mobile decision bar pad itself above the home indicator (safe-area-inset-bottom).
+export const viewport: Viewport = { viewportFit: "cover" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

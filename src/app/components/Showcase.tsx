@@ -5,10 +5,13 @@ import {
   Alert,
   Badge,
   Button,
+  DetailsList,
   Divider,
   Icon,
   Input,
   Label,
+  LabelValueRow,
+  OrderTypeBar,
   SegmentedControl,
   Slider,
   Switch,
@@ -151,7 +154,7 @@ export function Showcase() {
             helper="Available 1,250.00 USD"
           />
           <Input label="Limit price" size="md" unit="USD" value={price} onValueChange={setPrice} trailing={<Button variant="tertiary" aria-label="Use mid price">Mid</Button>} />
-          <Input label="Size" value="5000" onValueChange={() => {}} unit="USD" error="Not enough margin. Max 1,250.00 USD" />
+          <Input label="Size" value="5000" onValueChange={() => {}} unit="USD" status="error" helper="Not enough margin. Max 1,250.00 USD" />
           <Input label="Trigger price" size="md" unit="USD" value="" onValueChange={() => {}} disabled />
         </div>
       </Section>
@@ -168,6 +171,36 @@ export function Showcase() {
           <Slider aria-label="Size, percent of available" aria-valuetext={`${pct}%`} tone={tone} value={pct} onValueChange={setPct} />
           <Slider aria-label="Disabled slider" tone={tone} value={50} onValueChange={() => {}} disabled />
           <Label numeric tone="default">{pct}%</Label>
+        </div>
+      </Section>
+
+      <Section title="Composite · Order type bar">
+        <div className={s.column}>
+          <OrderTypeBar orderTypes={ORDER_TYPES} value={orderType} onValueChange={setOrderType} marginMode="Cross" leverage={20} />
+        </div>
+      </Section>
+
+      <Section title="Composite · Label-value row (xs, sm, tones) · Details list">
+        <div className={s.column}>
+          <dl className={s.column}>
+            <LabelValueRow size="sm" label="Available to trade" value="$1,250.00" />
+            <LabelValueRow size="sm" label="Current position" value="–" tone="muted" />
+          </dl>
+          <DetailsList aria-label="Order details">
+            <LabelValueRow label="Order value" value="$3,421.03" />
+            <LabelValueRow label="Est. price" value="$68,420.5" />
+            <LabelValueRow label="Net position" value="Long 0.0500 BTC" tone={tone} />
+            <LabelValueRow label="Margin required" value="$171.05" />
+            <LabelValueRow label="Est. liquidation price" value="$65,000.5" />
+            <LabelValueRow label="Fee (0.0158%)" labelAddon={<Badge tone="discovery">55% off</Badge>} value="$0.54" />
+            <LabelValueRow
+              label="Slippage"
+              onLabelClick={() => {}}
+              secondary="Est. 0%"
+              value="Max 8%"
+              action={{ icon: "pencil-box", label: "Edit slippage" }}
+            />
+          </DetailsList>
         </div>
       </Section>
 

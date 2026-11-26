@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { SegmentedControl } from "../SegmentedControl/SegmentedControl";
 
 type Theme = "classic" | "modern";
 
 /**
- * Switches the Semantic · Theme mode. The attribute lives on <html> because the component tokens are
- * declared on :root and custom properties resolve where they are declared.
+ * Switches the Semantic · Theme mode (prototype controls and the token page). Modern is a cosmetic exploration
+ * kept in the tokens, not a product theme switcher (the brief leaves that out). The attribute lives on <html>
+ * because the component tokens are declared on :root.
  */
 export function ThemeSwitch() {
   const [theme, setTheme] = useState<Theme>("classic");
@@ -15,29 +17,18 @@ export function ThemeSwitch() {
     const root = document.documentElement;
     if (theme === "modern") root.dataset.theme = "modern";
     else delete root.dataset.theme;
+    return () => void delete root.dataset.theme;
   }, [theme]);
 
   return (
-    <div role="radiogroup" aria-label="Theme" style={{ display: "inline-flex", gap: "var(--space-inline-xs)" }}>
-      {(["classic", "modern"] as const).map((t) => (
-        <button
-          key={t}
-          type="button"
-          role="radio"
-          aria-checked={theme === t}
-          onClick={() => setTheme(t)}
-          className="type-label-xs"
-          style={{
-            padding: "var(--space-inline-xs) var(--space-inset-sm)",
-            borderRadius: "var(--radius-control)",
-            background: theme === t ? "var(--color-bg-neutral-selected)" : "var(--color-bg-neutral-default)",
-            color: theme === t ? "var(--color-fg-primary)" : "var(--color-fg-secondary)",
-            textTransform: "capitalize",
-          }}
-        >
-          {t}
-        </button>
-      ))}
-    </div>
+    <SegmentedControl
+      aria-label="Theme"
+      options={[
+        { value: "classic", label: "Classic" },
+        { value: "modern", label: "Modern" },
+      ]}
+      value={theme}
+      onValueChange={(v) => setTheme(v as Theme)}
+    />
   );
 }

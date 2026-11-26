@@ -1,6 +1,6 @@
 "use client";
 
-import type { CSSProperties } from "react";
+import { useState, type CSSProperties } from "react";
 import s from "./Slider.module.css";
 
 export interface SliderProps {
@@ -24,12 +24,15 @@ export interface SliderProps {
  * so dragging, keyboard steps and screen readers work without custom handling.
  */
 export function Slider({ value, onValueChange, min = 0, max = 100, step = 1, tone = "success", disabled = false, className, ...aria }: SliderProps) {
+  // While the slider itself is in use the thumb follows the hand with no delay; otherwise it animates to the new value.
+  const [active, setActive] = useState(false);
   const pct = max === min ? 0 : (Math.min(max, Math.max(min, value)) - min) / (max - min);
   return (
     <div
       className={className ? `${s.root} ${className}` : s.root}
       data-tone={tone}
       data-disabled={disabled || undefined}
+      data-active={active || undefined}
       style={{ "--_pct": pct } as CSSProperties}
     >
       <span className={s.ramp} aria-hidden />
@@ -43,6 +46,12 @@ export function Slider({ value, onValueChange, min = 0, max = 100, step = 1, ton
         value={value}
         disabled={disabled}
         onChange={(e) => onValueChange(Number(e.target.value))}
+        onPointerDown={() => setActive(true)}
+        onPointerUp={() => setActive(false)}
+        onPointerCancel={() => setActive(false)}
+        onKeyDown={() => setActive(true)}
+        onKeyUp={() => setActive(false)}
+        onBlur={() => setActive(false)}
       />
       <span className={s.thumb} aria-hidden>
         <span className={s.grip} />

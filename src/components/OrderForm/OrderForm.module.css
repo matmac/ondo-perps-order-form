@@ -1,0 +1,61 @@
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--order-form-gap);
+  width: 100%;
+  max-width: var(--order-form-width);
+  padding: var(--order-form-padding);
+  border-radius: var(--order-form-radius);
+  background: var(--order-form-bg);
+}
+
+.group,
+.decision {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--order-form-item-gap);
+}
+
+.inline {
+  display: flex;
+  align-items: center;
+  gap: var(--order-form-inline-gap);
+}
+
+.slider { flex: 1; min-width: 0; }
+/* the % field next to the slider: wide enough for "100" and the unit */
+.percent { flex: none; width: calc(var(--size-control-md) * 2 + var(--space-inline-xs)); }
+.fill { flex: 1 1 0; min-width: 0; }
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--switch-target);
+  cursor: pointer;
+}
+.toggleRow[data-disabled] { cursor: not-allowed; }
+
+/*
+ * Mobile (Layout mode Mobile): the form fills the screen and the decision (review rows, notice, CTA) becomes a
+ * bar stuck to the bottom, so cost and the action stay on screen while the form scrolls. It moves after the
+ * details visually only; keyboard and reading order keep the decision before the details.
+ */
+@media (max-width: 767px) {
+  .form {
+    max-width: none;
+    border-radius: 0;
+  }
+
+  .decision {
+    order: 1;
+    position: sticky;
+    bottom: 0;
+    z-index: 1; /* above the positioned rows that scroll under it */
+    margin: 0 calc(var(--order-form-padding) * -1) calc(var(--order-form-padding) * -1);
+    padding: var(--order-form-padding);
+    padding-bottom: max(var(--order-form-padding), env(safe-area-inset-bottom));
+    background: var(--order-form-bar-bg);
+    box-shadow: inset 0 var(--border-width-default) 0 var(--order-form-bar-border);
+  }
+}

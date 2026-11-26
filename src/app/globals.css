@@ -56,8 +56,8 @@ button {
 /* Visually hidden, still read by screen readers. */
 .sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: 1px; /* raw-ok: standard visually-hidden pattern */
+  height: 1px; /* raw-ok: standard visually-hidden pattern */
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;

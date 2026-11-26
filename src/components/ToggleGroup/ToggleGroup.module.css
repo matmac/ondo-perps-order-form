@@ -8,6 +8,7 @@
 }
 
 .item {
+  composes: target from "../internal/target.module.css";
   height: var(--toggle-group-item-height);
   padding-inline: var(--toggle-group-item-padding-inline);
   border-radius: var(--toggle-group-item-radius);

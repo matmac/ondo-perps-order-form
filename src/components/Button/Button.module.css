@@ -1,4 +1,5 @@
 .button {
+  composes: target from "../internal/target.module.css";
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -6,11 +7,14 @@
   flex: none;
   white-space: nowrap;
   user-select: none;
+  text-decoration: none;
   background: var(--_bg);
   color: var(--_fg);
-  transition-property: background-color, color;
-  transition-duration: var(--motion-duration-state);
-  transition-timing-function: var(--motion-easing-standard);
+  /* colour crossfades (side switch, disabled): state; press: feedback */
+  transition:
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
 }
 
 .content {
@@ -47,7 +51,9 @@
   --_bg-disabled: var(--button-primary-bg-danger-disabled);
 }
 .button[data-variant="primary"]:hover { background: var(--_bg-hover); }
-.button[data-variant="primary"]:active { background: var(--_bg-pressed); }
+.button[data-variant="primary"]:active { background: var(--_bg-pressed); transform: scale(var(--button-primary-scale-pressed)); }
+.button[data-variant="primary"][aria-disabled="true"]:active,
+.button[data-variant="primary"][data-loading]:active { transform: none; }
 .button[data-variant="primary"][aria-disabled="true"] {
   background: var(--_bg-disabled);
   color: var(--button-primary-fg-disabled);
@@ -93,12 +99,9 @@
 .button[aria-disabled="true"],
 .button[data-loading] { cursor: not-allowed; }
 
-/* loading keeps the width: label hides, spinner sits on top */
-.button[data-loading] .content { visibility: hidden; }
+/* loading: the spinner takes the start icon slot, the label stays (it says what is happening) */
 .spinner {
-  position: absolute;
-  inset: 0;
-  margin: auto;
+  flex: none;
   width: var(--size-icon-sm);
   height: var(--size-icon-sm);
   border-radius: var(--radius-pill);
@@ -107,6 +110,3 @@
   animation: spin var(--motion-duration-loop) linear infinite;
 }
 @keyframes spin { to { transform: rotate(1turn); } }
-@media (prefers-reduced-motion: reduce) {
-  .spinner { animation-duration: calc(var(--motion-duration-loop) * 3); }
-}

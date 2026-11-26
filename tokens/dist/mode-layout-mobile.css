@@ -28,4 +28,8 @@
   --size-knob: var(--dimension-20);
   --size-grip-width: var(--dimension-1);
   --size-grip-height: var(--dimension-8);
+  --size-container-sm: var(--dimension-310); /** Narrow panel: the order form */
+  --size-container-md: var(--dimension-360); /** Side sheet or secondary column */
+  --size-container-lg: var(--dimension-720); /** Single-column page */
+  --size-container-xl: var(--dimension-1120); /** Wide page */
 }

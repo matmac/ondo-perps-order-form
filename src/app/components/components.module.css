@@ -1,5 +1,5 @@
 .page {
-  max-width: 720px;
+  max-width: var(--size-container-lg);
   margin: 0 auto;
   padding: var(--space-stack-lg);
   display: grid;
@@ -32,6 +32,6 @@
 .column {
   display: grid;
   gap: var(--space-stack-sm);
-  max-width: 360px;
+  max-width: var(--size-container-md);
 }
 .icon { color: var(--color-fg-secondary); }

@@ -9,6 +9,7 @@ export interface SwitchProps {
   /** Visible text is usually a Label next to it: point at it with aria-labelledby, or pass aria-label. */
   "aria-label"?: string;
   "aria-labelledby"?: string;
+  "aria-describedby"?: string;
   id?: string;
   className?: string;
 }

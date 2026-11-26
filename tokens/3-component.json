@@ -67,6 +67,13 @@
       "type": {
         "$type": "typography",
         "$value": "{type.label.sm}"
+      },
+      "scale": {
+        "$type": "number",
+        "pressed": {
+          "$value": "{motion.scale.press}",
+          "$description": "Press feedback on the trade CTA"
+        }
       }
     },
     "secondary": {
@@ -163,9 +170,6 @@
     "item": {
       "bg": {
         "$type": "color",
-        "hover": {
-          "$value": "{color.bg.neutral.hover}"
-        },
         "selected": {
           "$value": "{color.bg.neutral.selected}"
         }
@@ -431,10 +435,12 @@
         "$value": "{type.label.sm}"
       },
       "value": {
-        "$value": "{type.value.md}"
+        "$value": "{type.value.sm}",
+        "$description": "Value and unit in the md field (prices, %), as in Figma"
       },
       "value-lg": {
-        "$value": "{type.value.lg}"
+        "$value": "{type.value.lg}",
+        "$description": "Value and unit in the lg field (amount), as in Figma"
       }
     }
   },
@@ -759,6 +765,22 @@
       "$type": "dimension",
       "$value": "{space.inline.sm}",
       "$description": "Side-by-side items, e.g. quick-size stops, options row"
+    },
+    "width": {
+      "$type": "dimension",
+      "$value": "{size.container.sm}"
+    },
+    "bar": {
+      "$description": "Mobile: the decision bar (review rows, notice, CTA) sticks to the bottom of the screen",
+      "bg": {
+        "$type": "color",
+        "$value": "{color.bg.surface.default}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{color.border.subtle}",
+        "$description": "Top edge, separates the bar from the scrolling form"
+      }
     }
   },
   "focus-ring": {

@@ -1,0 +1,21 @@
+.reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--motion-duration-state) var(--motion-easing-exit),
+    opacity var(--motion-duration-state) var(--motion-easing-exit);
+}
+.reveal[data-open] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-rows var(--motion-duration-reveal) var(--motion-easing-enter),
+    opacity var(--motion-duration-reveal) var(--motion-easing-enter);
+}
+.inner {
+  min-height: 0;
+  overflow: clip;
+}
+/* let focus rings show once the content is open */
+.reveal[data-open] .inner { overflow-clip-margin: var(--space-inline-xs); }
