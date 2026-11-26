@@ -12,6 +12,12 @@ npm run dev
 
 Open http://localhost:3000.
 
+## Branches and deploys
+
+- `main` holds reviewed work. Vercel deploys it to production.
+- Each build step gets its own branch (`step/NN-name`) and a pull request into `main`. Vercel builds a preview URL for every pull request, so each step is reviewed live before it merges.
+- Before a pull request: `npm run lint && npx tsc --noEmit && npm run build`.
+
 ## Where things live
 
 | What | Where |
